@@ -1,0 +1,219 @@
+
+
+$sideMenuWidth : 60%;
+$togglerWidth : 30px;
+
+
+nav.site-header {padding: 20px 10px;}
+.scrolled nav.site-header {background: rgba(4, 82, 124, 1);}
+
+.nav-item {
+  position: relative;
+  @include link-color($text-light);
+}
+
+.desktop-menu-row {
+  .nav-item {
+    display: inline-block; 
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 12px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    color: #fff;
+    &.active {
+      background: white;
+      border-radius: 47px;
+      color: #0DA1ED;
+      font-size: 14px;
+    }
+  }
+}
+
+
+.navbar-toggler {
+  border-top: none; width: $togglerWidth; height: $togglerWidth; border-radius: 0; margin: 0; padding: 0;
+  transform: rotate(0deg) translate(0px, 0px);
+
+  position: absolute;
+  right: $togglerWidth / 2;
+  z-index: 10;
+
+  -webkit-transition: transform 0.5s;
+  transition: transform 0.5s;
+
+  overflow: hidden;
+
+  &, &:active, &:focus, &:hover {outline: none;}
+  &::before, &::after {
+    content: "."; display: block; width: $togglerWidth; height: 1px; border-top: solid 2px #fff; text-indent: -1000px; 
+    overflow:hidden;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  &::before {transform: rotate(45deg) translate(1px, 1px);}
+  &::after {transform: rotate(-45deg) translate(0px, 0px);}
+
+  &.collapsed {right: $togglerWidth / 2; border-top: solid 2px rgba(255,255,255,1); transform: rotate(0deg) translate(0px, 0px);}
+  &.collapsed::before {transform: translate(0, -1px);}
+  &.collapsed::after {transform: translate(0, 10px);}
+}
+
+#mobile-menu-curtain {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: #000;
+
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+
+  display: none;
+  visibility: hidden;
+
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+
+  .mobile-menu-open & {
+    display: block;
+    visibility: visible;
+
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+    opacity: 0.4;
+    z-index: 1;
+  }  
+}
+
+
+.navbar-collapse {
+  position: fixed;
+  right: -1 * $sideMenuWidth;
+  width: $sideMenuWidth;
+  background: rgba(4, 82, 124, 0.9);
+  padding-top: 74px;
+  top: 0px;
+  bottom: 0px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 5;
+
+  &.show {right: 0px;}
+  & li a {
+    display: block;
+    padding: 5px 10px;
+    margin: 5px 20px;
+  }
+
+  .nav-item.active a {border-bottom: solid 2px rgba(255,255,255,0.8);}
+
+}
+
+
+ul.navigation-menu {
+  float: right;
+  li {
+    list-style-type: none;
+    display: inline-block;
+
+    a {
+      padding: 10px 25px;
+      display: block;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    &.active a {
+      background: white;
+      border-radius: 47px;
+      color: #0DA1ED;
+    }
+  }
+}
+
+.footer {
+    background: #272727;
+    padding: 50px 0px 20px 0px;
+}
+.footer-top {
+    width: 100%;
+    border-bottom: 1px solid #3C3C3C;
+}
+ul.footer-social-icons {
+    width: 100%;
+    display: table;
+    float: right;
+    text-align: right;
+    padding-top: 20px;
+
+    li {
+      list-style-type: none;
+      display: inline-block;
+      padding: 10px;
+      img {
+        width: 30px;
+      }
+    }
+
+}
+
+.footer-bottom {
+    padding-top: 15px;
+}
+a.cust-copyright {
+    color: #fff;
+    font-weight: 200;
+}
+ul.footer-bottom-menu {
+    text-align: right;
+    li {
+      list-style-type: none;
+      display: inline-block;
+      padding: 0px 20px;
+      color: #fff;
+      a {
+        color: white;
+        font-weight: 200;
+      }
+    }
+}
+
+
+
+.mobile-menu-row {display: none;}
+@media only screen and (max-width: 991.98px) {
+  .mobile-menu-row {display: block; padding: 0 10px;}
+  .desktop-menu-row {display: none;}
+}
+
+@media only screen and (max-width: 991.98px) {
+  
+}
+
+@media (max-width: 768px) {
+
+  .logo-block ul {margin-bottom: 0;}
+  .logo-block ul li {margin: 10px 0; max-width: 32%;}
+  
+  img.smaller-in-mobile {width: 90%;}
+
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+  
+}
+
+@media (min-width: 1200px) {
+  
+}
+
+@media (min-width: 1440px) {
+  
+}
+
+
+

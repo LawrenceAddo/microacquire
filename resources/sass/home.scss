@@ -1,0 +1,728 @@
+// Variables
+@import 'variables';
+
+
+body, p, h1, h2, h3, h4, h5, h6{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.banner-section {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+}
+
+.private-and-anonymous:before {
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 50px !important;
+    background-image: url(#{$imgPath}/home/Group-6.png);
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 514px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.cust-desc {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+
+}
+.cust-desc h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 39px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0 auto;
+}
+.cust-desc p {
+    max-width: 461px;
+}
+.cust-desc p {
+    max-width: 461px;
+    margin: 0 auto;
+    margin-top: 35px;
+}
+a.apply-to-join {
+    background: #00C306;
+    height: 40.56px;
+    width: 168px;
+    border-radius: 20.28px;
+    color: #fff;
+    padding: 12px 26px;
+}
+ul.cust-btns li i {
+    padding-left: 6px;
+}
+
+ul.cust-btns li {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+.banner-main-section {
+    display: block;
+    width: 100%;
+    min-height: 725px;
+}
+.brand-logo {
+    background: #737373;
+    -webkit-clip-path: polygon(0 50%, 100% 21%, 100% 99%, 0% 100%);
+    clip-path: polygon(0 50%, 100% 21%, 100% 99%, 0% 100%);
+    margin-top: -161px;
+    padding: 60px 0px;
+}
+.brand-logo p {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #fff;
+    padding-top: 55px;
+}
+.brand-logo img {
+    width: 100%;
+}
+.brand-logo-desc {
+    margin-top: 80px;
+}
+.process-work-section {
+    background: #3C3C3C;
+    padding: 80px 0px;
+    text-align: center;
+    position: relative;
+    color: #fff;
+
+    h2 {
+        margin-top: 0px;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    h3 {
+        font-size: 18px;
+        padding: 20px 0;
+    }
+
+    .inner {
+        p {
+            padding: 0 20%;
+        }
+    }
+}
+
+
+.Why-sell-your-startup {
+    background-image: url(#{$imgPath}/home/annie-spratt-608001-unsplash.png);
+    background-repeat: no-repeat;
+    padding: 100px 0px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.Why-sell-your-startup h2 {
+    text-align: center;
+    color: #fff;
+    padding-bottom: 80px;
+}
+span.cust-offer {
+    display: block;
+    font-size: 60px;
+    color: #fff;
+    font-weight: 100;
+}
+span.cust-offer-desc {
+    font-size: 18px;
+    color: #fff;
+    text-align: left;
+    font-weight: 300;
+}
+span.compnies-are-saying {
+    font-size: 30px;
+    color: #fff;
+    text-align: right;
+    font-weight: 300;
+}
+span.compnies-are-saying p {
+    line-height: 30px;
+}
+.why-chooes-us h2 {
+    text-align: center;
+    margin-bottom: 80px;
+    color: #737373;
+    text-transform: capitalize;
+}
+.why-chooes-us {
+    padding: 100px 0px;
+    background :#f8f8f8;
+    position: relative;
+}
+.why-chooes-us-left {
+    border: 1px solid #BCBCBC;
+    border-right: 0;
+    min-height: 185px;
+    max-width: 471px;
+    background: #fff;
+    border-radius: 10px 0 0 10px;
+}
+.why-chooes-us-left .why-chooes-us-sub-left {
+    text-align: right;
+    padding-top: 43px;
+}
+.why-chooes-us-left .why-chooes-us-sub-right p {
+    line-height: 18px;
+}
+
+.why-chooes-us-left .why-chooes-us-sub-right {
+    padding-top: 40px;
+    text-align: right;
+
+}
+.why-chooes-us-left h3, .why-chooes-us-left span.cust-sell-compny {
+    color: #0DA1ED;
+    text-transform: capitalize;
+}
+.why-chooes-us-right {
+    border: 1px solid #00B049;
+    min-height: 185px;
+    max-width: 471px;
+    background: #00B049;
+    border-radius: 0 10px 10px 0;
+}
+.why-chooes-us-right .why-chooes-us-sub-left { padding-top: 5px;}
+.why-chooes-us-right img.img-responsive {
+    margin-top: 60px;
+    /*height: 50px;*/
+    text-align: center;
+}
+.why-chooes-us-right .why-chooes-us-sub-right h3, .why-chooes-us-sub-right span {
+    color: #fff;
+}
+.why-chooes-us-right .why-chooes-us-sub-right {
+    padding-top: 45px;
+        text-transform: capitalize;
+}
+.why-chooes-us-left:before {
+    content: '';
+    position: absolute;
+    padding: inherit;
+    background-image: url(#{$imgPath}/home/crose.png);
+    z-index: 1;
+    background-repeat: no-repeat;
+    height: 110px;
+    max-width: 100px !important;
+    width: 100%;
+    top: -19px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0 auto;
+}
+.why-chooes-us-right:before {
+    content: '';
+    position: absolute;
+    padding: inherit;
+    background-image: url(#{$imgPath}/home/check.png);
+    z-index: 1;
+    background-repeat: no-repeat;
+    height: 110px;
+    max-width: 100px !important;
+    width: 100%;
+    top: -19px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0 auto;
+}
+a.apply-to-join {
+    background: #0DA1ED;
+  }
+  .why-chooes-us-btn {
+    width: 100%;
+    display: table;
+    clear: both;
+    text-align: center;
+    margin-top: 80px;
+}
+.we-cannot-buyer {
+    text-align: center;
+    padding: 70px 0px;
+    background: #3C3C3C;
+    position: relative;
+}
+span.we-cannot-buyer-text {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+}
+.we-cannot-buyer-sub {
+    font-size: 24px;
+    font-weight: normal;
+    padding: 0 20%;
+}
+.we-cannot-buyer:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #f8f8f8;
+    top: 0;
+    position: absolute;
+    left: 50%;
+}
+.process-work-section:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #737373;
+    top: 0;
+    position: absolute;
+    left: 50%;
+}
+.col-md-6.seller-sec-img {
+    background-color: #3C3C3C;
+    background-image: url(#{$imgPath}/home/seller.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 550px;
+    position: relative;
+    background-position: center;
+}
+.col-md-6.buyer-sec-img{
+    background-image: url(#{$imgPath}/home/buyer.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 550px;
+    position: relative;
+    background-position: center;
+}
+.seller-sec-item {
+    position: absolute;
+    bottom: 10%;
+    right: 90px;
+    text-align: right;
+}
+.buyer-sec-item {
+    position: absolute;
+    bottom: 10%;
+    left: 60px;
+}
+.seller-sec-item, .buyer-sec-item {
+    max-width: 350px;
+    width: 100%;
+}
+.seller-sec-item p, .buyer-sec-item p {
+    line-height: 28px;
+    font-size: 18px;
+    padding-top: 7px;
+}
+.seller-sec-btn a.apply-to-join {
+    background-color: #FFFFFF;
+    color: #00B049;
+}
+.buyer-sec-btn a.apply-to-join {
+    background-color: #FFFFFF;
+    color: #0DA1ED;
+}
+.buyer-sec-btn, .seller-sec-btn {
+    padding-top: 30px;
+}
+.buyer-seller h2 {
+    font-size: 40px;
+}
+.seller-sec-item h2, .seller-sec-item p, .buyer-sec-item h2, .buyer-sec-item p {
+    color: #fff;
+}
+
+.buyer-seller:before, .buyer-seller:after, .why-chooes-us:after, .Why-sell-your-startup:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+.Why-sell-your-startup:after {
+    border-top: 20px solid #3C3C3C;
+    top: 0;
+}
+.why-chooes-us:after{
+    border-top: 20px solid #057bb8;
+    top: 0;
+}
+.why-chooes-us:before {
+    content: '';
+    position: absolute;
+    border: 1px dashed #d9d9d9;
+    width: 50%;
+    top: 50%;
+}
+.why-chooes-us .dash-decorator {
+    position: absolute;
+    border: 1px dashed #b1e3c5;
+    right: 0;
+    width: 50%;
+    top: 50%;
+}
+
+.why-chooes-us .container {
+    position: relative;
+    z-index: 1;
+}
+.buyer-seller:before{
+    border-top: 20px solid #3c3c3c;
+    top: 0;
+}
+.buyer-seller:after{
+    border-bottom: 20px solid #0077b4;
+    bottom: 0;
+}
+.buyer-seller {
+    position: relative;
+    width: 100%;
+    display: table;
+}
+.private-and-anonymous-bottom {
+    background: #0077B4;
+    text-align: center;
+    padding: 70px 0px;
+}
+.private-and-anonymous-bottom h3, .private-and-anonymous-bottom p {
+    padding: 20px 0;
+    color: #fff;
+}
+.private-and-anonymous-bottom h3 {
+    font-weight: 300;
+}
+.private-and-anonymous-bottom p {
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: 300;
+    padding-top: 5px;
+}
+
+.footer-top img.img-responsive {
+    max-width: 130px;
+}
+p.cust-address {
+    color: #fff;
+    font-weight: 300;
+    padding-top: 33px;
+}
+
+.brand-logo {
+    
+    clip-path: polygon(0 49%, 100% 21%, 100% 101%, 0% 100%);
+    margin-top: -177px;
+    
+}
+.private-and-anonymous-bottom {
+    position: relative;
+}
+
+.private-and-anonymous-bottom:before {
+    position: absolute;
+    width: 100%;
+    content: '';
+    border: 1px dotted #fff;
+    left: 0;
+    right: 0;
+    top: 126px;
+    opacity: 0.5;
+}
+
+img.adjust-12px-abov {
+    margin-top: -12px;
+    margin-bottom: 12px;
+}
+
+.process-work-section img {
+    padding: 10px;
+    background: #3c3c3c;
+}
+.process-work-section:before {
+    position: absolute;
+    content: '';
+    border: 1px dashed #418595;
+    width: 100%;
+    top: 226px;
+    left: 0;
+    right: 0;
+}
+.private-and-anonymous-bottom img {
+    padding: 10px;
+    background: #0077b4;
+}
+.private-and-anonymous-bottom .container {
+    position: relative;
+    z-index: 999999;
+}
+@media (min-width: 1200px){
+.why-chooes-us .container {
+    width: 1024px;
+}
+}
+@media(max-width:767px){
+.why-chooes-us:before, .process-work-section:before, .private-and-anonymous-bottom:before {
+ display: none;
+}
+.private-and-anonymous:before {bottom: 20%;}
+.cust-desc {
+   top: 30%;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+.brand-logo {
+margin-top: -286px;
+   }
+    .why-chooes-us {
+
+   height: auto;
+   }
+   ul.navigation-menu li 
+    {
+    display:block;
+    }
+    ul.navigation-menu li a{
+    text-align:center;
+    }
+    ul.navigation-menu {
+    float: none;
+    padding-left: 0px;
+}
+    .footer-top img.img-responsive {
+   
+    text-align: center;
+    margin: 0 auto;
+}
+p.cust-address {
+    
+    text-align: center;
+}
+    
+        .footer-top img.img-responsive {
+   
+    text-align: center;
+    margin: 0 auto;
+}
+p.cust-address {
+    
+    text-align: center;
+}
+ul.footer-social-icons {
+   
+     float: none;
+    text-align: center;
+    padding-left: 0px;
+}
+ul.footer-bottom-menu {
+    text-align: center;
+    padding-left: 0px;
+}
+a.cust-copyright {
+    padding-bottom: 10px;
+   text-align: center;
+    display: table;
+    float: none;
+    margin: 0 auto;
+}
+.why-chooes-us-left {
+   margin: 0 auto;
+    display: block;
+    
+}
+.why-chooes-us-right
+{
+margin: 0 auto;
+    display: block;
+    
+}
+span.cust-offer {
+   text-align: center;
+   padding-top: 25px;
+ }
+ span.cust-offer-desc {
+    text-align: center;
+    display: table;
+    padding-bottom: 50px;
+    margin: 0 auto;
+    }
+    span.compnies-are-saying {
+   
+    text-align: center;
+    padding-bottom: 50px;
+    display: table;
+    margin: 0 auto;
+}
+.seller-sec-item {
+  right: 0px;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.buyer-sec-item {  
+  left: 0px;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.Why-sell-your-startup img {
+    text-align: center;
+    margin: 0 auto;
+    display: table;
+}
+.process-work-section p {
+    margin-bottom: 15px;
+}
+.private-and-anonymous-bottom p
+{
+     margin-bottom: 15px;
+}
+.why-chooes-us-sub-right {
+    text-align: center !important;
+    padding-bottom: 40px;
+}
+
+}
+@media(max-width:991px) and (min-width:768px)
+{
+    .why-chooes-us {
+
+   height: auto;
+   }
+   .process-work-section p {
+    margin-bottom: 15px;
+}
+.private-and-anonymous-bottom p
+{
+     margin-bottom: 15px;
+}
+.why-chooes-us-left {
+   margin: 0 auto;
+    display: block;
+    
+}
+.why-chooes-us-right
+{
+margin: 0 auto;
+    display: block;
+    
+}
+.seller-sec-item {
+  right: 0px;  
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.buyer-sec-item {  
+  left: 0px;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.Why-sell-your-startup img {
+    text-align: center;
+    margin: 0 auto;
+    display: table;
+}
+span.cust-offer {
+   text-align: center;
+   padding-top: 25px;
+ }
+ span.cust-offer-desc {
+    text-align: center;
+    display: table;
+    padding-bottom: 50px;
+    margin: 0 auto;
+    }
+    span.compnies-are-saying {
+   
+    text-align: center;
+    padding-bottom: 50px;
+    display: table;
+    margin: 0 auto;
+}
+.why-chooes-us-sub-right {
+    text-align: center !important;
+    padding-bottom: 40px;
+}
+.why-chooes-us-left:before {
+    
+    left:50px;
+ } 
+
+.why-chooes-us-right:before {
+  left:50px;
+ } 
+}
+@media(min-width:768px)
+{
+ 
+}
+@media(max-width:767px) and (min-width:568px)
+{
+    .private-and-anonymous:before {
+    background-size: 100%;
+    }
+}
+
+@media(max-width:568px){
+    .private-and-anonymous:before {display: none;}
+    .cust-desc {top: 20%;}
+    .banner-section, .banner-main-section {min-height: 600px;}
+}
+
+
+@media(max-width:767px) and (min-width:480px)
+{
+    .why-chooes-us-left:before {    
+        left:50px;
+    } 
+
+    .why-chooes-us-right:before {
+        left:50px;
+    } 
+}
+
+@media(max-width:480px)
+{
+    .why-chooes-us-left:before {
+    
+    left: 20%;
+ } 
+
+.why-chooes-us-right:before {
+  left: 20%;
+ } 
+}
+
+@media(max-width:380px) 
+{
+ul.cust-btns li
+{
+margin-top:5px;
+}
+.brand-logo {
+margin-top: -215px;
+   }
+}

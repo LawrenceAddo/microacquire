@@ -1,0 +1,63 @@
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: "Nunito", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+
+$imgPath : "/images";
+
+$text-light: #ffffff;
+$text-lightgrey: #e0e1e1;
+$text-grey: #bcbcbc;
+$text-dark: #737373;
+$text-focus: #0da1ed;
+$text-highlight: #dbfcdc;
+
+$bg-headline: #737373;
+$bg-dark: #3c3c3c;
+$bg-light: #ffffff;
+$bg-focus: #0077b4;
+$bg-highlight: #3ca23f;
+
+$partial-slider-height: 580px;
+
+
+@mixin triangle-down ($width, $color) {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-top: $width solid $color;
+}
+
+@mixin triangle-up ($width, $color) {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-bottom: $width solid $color;
+}
+
+@mixin btn-color($type, $textcolor, $bgcolor) {
+    .btn.btn-#{$type} {
+        color: $textcolor;
+        background: $bgcolor;
+        border-color: $bgcolor;
+    }
+}
+
+@mixin link-color($color) {
+    a, a:hover, a:visited, a:focus {color: $color;}
+}
