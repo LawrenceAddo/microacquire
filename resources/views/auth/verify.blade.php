@@ -20,7 +20,7 @@
             <div style="max-width: 680px; margin: auto;" class="text-center">
                 <h2>{{ __('Verify your Email to Proceed') }}</h2>
                 
-                <p>We just sent an email to the address: {{ $user->email }}<br>
+                <p>We just sent an email to the address: {{ Auth::user()->email }}<br>
                 Please check your email and click on the link provided to verify your address.</p>
                 <p>Do you want to <a href="#">Change Email?</a>
                 <br>or<br>
