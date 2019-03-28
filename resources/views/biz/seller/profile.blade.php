@@ -202,7 +202,8 @@
                     <div class="col-md-12 col-sm-12 text-center">
                         @component('comps.checkbox')
                             @slot('checked') @endslot
-                            @slot('checked') fancy @endslot
+                            @slot('name') iagree @endslot
+                            @slot('id') iagree @endslot
                             You agree to our <a href="#">Terms of Service</a> and have read and understood the <a href="#">Privacy Policy</a>
                         @endcomponent
                     </div>

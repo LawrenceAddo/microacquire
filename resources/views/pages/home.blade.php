@@ -113,7 +113,7 @@
         <div class="col-md-6 why-chooes-us-right">
             <div class="row">
               <div class="col-md-6 why-chooes-us-sub-left">
-                <img src="/images/home/MICROACQUIRE.png" alt="" class="img-responsive">
+                <img src="/images/home/microacquire.png" alt="" class="img-responsive">
               </div>
               <div class="col-md-6 why-chooes-us-sub-right">
                 <h3>new way</h3>

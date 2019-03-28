@@ -6,7 +6,7 @@
         <div id="mobile-menu-curtain"></div>
         <div class="logo float-left">
           <a class="" href="/">
-            <img src="/images/home/MICROACQUIRE.png" alt="" class="img-responsive" />
+            <img src="/images/home/microacquire.png" alt="" class="img-responsive" />
           </a>
         </div>
 
@@ -33,7 +33,7 @@
       <div class="row desktop-menu-row">
         <div class="logo col-md-3">
           <a class="" href="/">
-            <img src="/images/home/MICROACQUIRE.png" alt="" class="img-responsive" />
+            <img src="/images/home/microacquire.png" alt="" class="img-responsive" />
           </a>
         </div>
 
@@ -56,7 +56,7 @@
 
       <div class="row footer-top">
         <div class="col-md-6 col-sm-6">
-          <img src="/images/home/MICROACQUIRE.png" alt="" class="img-responsive">
+          <img src="/images/home/microacquire.png" alt="" class="img-responsive">
           <p class="cust-address">785 Shotgun Road, Sunrise,<br>Florida 33326. United States</p>
         </div>
         <div class="col-md-6 col-sm-6">

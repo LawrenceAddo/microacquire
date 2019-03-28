@@ -19,4 +19,10 @@ Route::get('/', function () {
 
 
 Route::get('/', 'PagesController@home');
-Route::get('/profile', 'PagesController@seller');
+Route::get('/profile', 'PagesController@seller')->middleware('verified');
+
+Auth::routes(['verify' => true]);
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Route::get('/home', 'HomeController@index')->name('home');

@@ -49257,9 +49257,9 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\projects\MicroAcquire\build\microacq\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! F:\projects\MicroAcquire\build\microacq\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! F:\projects\MicroAcquire\build\microacq\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! F:\projects\microacquire\build\microacq\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! F:\projects\microacquire\build\microacq\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! F:\projects\microacquire\build\microacq\resources\sass\home.scss */"./resources/sass/home.scss");
 
 
 /***/ })

@@ -1,4 +1,4 @@
-@include('comps.navs')
+
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -14,13 +14,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
 
 </head>
-<body class="@yield('body_class') {{ $page_class ?? '' }}">
+<body class="type-simple @yield('body_class') {{ $page_class ?? '' }}">
 
-  @yield('nav')
+  <nav class="site-header">
+    <div class="container text-center">
+      <a class="" href="{{ url('/') }}">
+        <img src="{{ url('/') }}/images/home/microacquire.png" alt="" class="logo" />
+      </a>
+    </div>
+  </nav>
 
-  @yield('content')
+  @component('comps.block')
+    @slot('block_name')
+        @yield('block_name')
+    @endslot
+    @slot('block_class')
+        @yield('block_class')
+    @endslot
 
-  @yield('footer')
+    @yield('content')
+
+  @endcomponent
+
+  <div class="bottom-deco"></div>
+
+  
 
 
 <!-- jQuery library -->
