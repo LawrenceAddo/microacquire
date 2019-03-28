@@ -10981,7 +10981,7 @@ body.type-simple .bottom-deco {
   left: 0;
   bottom: 0;
   background: url(/images/pages/banner-sepa.png) transparent no-repeat center bottom;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .page-signup {
