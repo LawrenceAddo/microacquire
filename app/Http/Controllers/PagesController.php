@@ -24,4 +24,9 @@ class PagesController  extends Controller
     {
         return view('biz.seller.profile', ['page_class' => 'seller-profile']);
     }
+
+    public function edit()
+    {
+        return view('biz.seller.profile', ['page_class' => 'seller-profile']);
+    }
 }

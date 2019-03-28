@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 
 Route::get('/', 'PagesController@home');
-Route::get('/profile', 'PagesController@seller')->middleware('verified');
+
+Route::get('/profile', 'PagesController@seller');
+Route::get('/edit-profile', 'PagesController@edit')->middleware('verified');
 
 Auth::routes(['verify' => true]);
 
