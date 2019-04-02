@@ -33,9 +33,14 @@
         @slot('block_name')
             heading
         @endslot
+        @slot('block_class')
+            info-block
+        @endslot
+        
+
         <div class="col-md-12 col-sm-12">
-            <h2>Company Name</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere quam aliquam quam porttitor, sed volutpat magna lacinia. Ut sagittis mollis tellus eu malesuada. Nunc facilisis posuere justo, eget lacinia lacus suscipit ac. Curabitur mollis fringilla lorem, eget elementum augue blandit vulputate. Praesent eleifend pharetra risus, sit amet malesuada dolor pretium venenatis. Suspendisse semper tincidunt libero vitae mollis. Suspendisse euismod dui nisi, vel placerat nulla malesuada non.</p>
+            <h2>{{ $selling->name }}</h2>
+            <p class="subheading">{{ $selling->description }}</p>
         </div>
 
     @endcomponent
@@ -48,6 +53,9 @@
         @slot('block_name')
             metrics
         @endslot
+        @slot('block_class')
+            block-dark info-block
+        @endslot
 
         <div class="col-md-6 col-sm-12 metrics-col">
             <div class="metrics-inner">
@@ -55,19 +63,19 @@
                     <h2>Metrics</h2>
                 </div>
                 <div class="metric-item">
-                    <h2>$556,440</h2>
+                    <h2>${{ $selling->revenue }}</h2>
                     <p>Recurring revenue</p>
                 </div>
                 <div class="metric-item">
-                    <h2>10-24-1986</h2>
+                    <h2>{{ $selling->date_founded }}</h2>
                     <p>Date founded</p>
                 </div>
                 <div class="metric-item">
-                    <h2>456,655</h2>
+                    <h2>{{ $selling->customers_cnt }}</h2>
                     <p>Number of customers</p>
                 </div>
                 <div class="metric-item">
-                    <h2>$900,000</h2>
+                    <h2>${{ $selling->price }}</h2>
                     <p>Asking price for purchase</p>
                 </div>
             </div>
@@ -77,15 +85,13 @@
             <div class="slide-inner">
                 
                 <div id="gallery_slide" class="fancy-slider">
-                    <div class="slide-item">
-                        <a class="fancybox" rel="group" href="{{ url('/') }}/images/samples/01.jpg"><img src="{{ url('/') }}/images/samples/01.jpg" alt="" /></a>
-                    </div>
-                    <div class="slide-item">
-                        <a class="fancybox" rel="group" href="{{ url('/') }}/images/samples/02.jpg"><img src="{{ url('/') }}/images/samples/02.jpg" alt="" /></a>
-                    </div>
-                    <div class="slide-item">
-                        <a class="fancybox" rel="group" href="{{ url('/') }}/images/samples/03.jpg"><img src="{{ url('/') }}/images/samples/03.jpg" alt="" /></a>
-                    </div>
+                    @foreach ($selling->images as $img)
+                        @if($img['path'])
+                            <div class="slide-item">
+                                <a class="fancybox" rel="group" href="{{ $img['url'] }}"><img src="{{ $img['url'] }}" alt="" /></a>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
 
             </div>
@@ -105,10 +111,11 @@
         <div class="col-md-12 col-sm-12">
             <div class="focus-item">
                 <h3>Reason for selling</h3>
-                <p>The owners have created an incredible product that current users love. However, time has been invested in the development rather than the marketing of the product. They are currently working on a large software project that will require all of their time and attention, They understand the tradeoff they are giving up with the marketing opportunity for this software.</p>
+                <p>{{ $selling->reason }}</p>
             </div>
             <div class="focus-item">
                 <h3>Growth opportunity</h3>
+                <p>{{ $selling->growth }}</p>
                 <p>There is a huge amount of potential for growth and the owners have not given as much attention to the sales side preferring to concentrate on adding additional features and ironing out any bugs.</p>
                 <p>The suggested ways to grow the business are:</p>
                 <ul>
@@ -120,6 +127,7 @@
             </div>
             <div class="focus-item">
                 <h3>Highlights & Key Assets</h3>
+                <p>{{ $selling->highlights }}</p>
                 <ul>
                     <li>SaaS company with very little overhead.</li>
                     <li>In-demand product solving major drawback for the Shopify ecommerce platform.</li>
@@ -134,11 +142,11 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <h3>Financing / funding</h3>
-                        <p>Partial financing will be considered</p>
+                        <p>{{ $selling->fi_info }}</p>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <h3>Team</h3>
-                        <h5>430 Employees</h5>
+                        <h5>{{ $selling->team }}</h5>
                     </div>
                 </div>
             </div>
@@ -159,12 +167,15 @@
         <div class="col-md-12 col-sm-12">
             <h2>Pitch deck</h2>
             <ul class="file-list">
-                <li>File name here.pdf</li>
-                <li>File name number 2.pdf</li>
+                @foreach ($selling->files as $f)
+                    @if($f['path'])
+                        <li><a href="{{ $f['url'] }}">{{ $f['name'] }}</a></li>
+                    @endif
+                @endforeach
             </ul>
-
+            <br><br>
             <h3>On-going support</h3>
-            <p>Full support and training will be provided. This is negotiable depending on your needs. Owners will be helping out with the transition and training for up to 3 months for free. For an additional period of support, owners are open to a negotiable recurring payment every month in advance.</p>
+            <p>{{ $selling->support }}</p>
         </div>
     @endcomponent
 

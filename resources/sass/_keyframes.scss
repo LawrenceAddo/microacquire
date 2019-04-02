@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 320;
+        stroke-dashoffset: 0
+    }
+    50% {
+        stroke-dasharray: 280, 320;
+        stroke-dashoffset: -80
+    }
+    to {
+        stroke-dasharray: 280, 320;
+        stroke-dashoffset: -300
+    }
+}
+
+@keyframes dash-small {
+    0% {
+        stroke-dasharray: 1, 160;
+        stroke-dashoffset: 0
+    }
+    50% {
+        stroke-dasharray: 140, 160;
+        stroke-dashoffset: -40
+    }
+    to {
+        stroke-dasharray: 140, 160;
+        stroke-dashoffset: -150
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes notify {
+    0% {
+        @include box-shadow(0 0 0px 0px #ffd4d4);
+    }
+    50% {
+        @include box-shadow(0 0 10px 5px #ffd4d4);
+    }
+    to {
+        @include box-shadow(0 0 0px 0px #ffd4d4);
+    }
+}

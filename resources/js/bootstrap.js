@@ -55,4 +55,10 @@ if (token) {
 //     encrypted: true
 // });
 
+window.SITE_URL = '';
+
 require('./layout');
+
+require('./plugins');
+require('./notify');
+require('./modal');

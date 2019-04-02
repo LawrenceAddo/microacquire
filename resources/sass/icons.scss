@@ -1,0 +1,5 @@
+.ma-icon {
+  &.icon-check {
+    @include icon-check($green, 100px, 1px);
+  }
+}

@@ -27,4 +27,12 @@ Auth::routes(['verify' => true]);
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/verified', 'PagesController@verified');
+
+Route::get('/users/profile/view', 'ProfileController@sellerView')->name('seller_view');
+Route::get('/users/profile/edit', 'ProfileController@sellerEdit')->name('seller_edit');
+Route::post('/users/profile/save', 'ProfileController@sellerSave')->name('seller_save');
+
+Route::post('/upload/temp', 'ResourcesController@uploadToTemp')->name('upload_temp');
+
+Route::get('/res/selling/{id}/{sub_path}', 'ResourcesController@getSellerSpecific')->where('sub_path', '.*');

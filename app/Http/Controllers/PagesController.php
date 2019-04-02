@@ -19,10 +19,14 @@ class PagesController  extends Controller
         return view('pages.home', ['page_class' => 'home']);
     }
 
+    public function verified() {
+        return view('auth.verified');   
+    }
+
 
     public function seller()
     {
-        return view('biz.seller.profile', ['page_class' => 'seller-profile']);
+        return view('biz.seller.profile', ['page_class' => 'seller-profile']);    
     }
 
     public function edit()

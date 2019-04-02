@@ -47,6 +47,29 @@ function init_plugins() {
   if(jQuery().fancybox) {
     $(".fancybox").fancybox();
   }
+
+  $('textarea').each(function(i, o){
+    var $obj = $(o);
+    if ($obj.length < 1) return;
+    var limitv = parseInt($(o).attr('limit'));
+    limitv = isNaN(limitv) ? 1000 : limitv;
+
+    $obj.typerLimit({
+        max_char_count: limitv,
+        label_char_left: $obj.parent().find('.char-counter .metre')
+    });
+
+  });
+
+  $('.datepicker').datepicker({
+    zIndexOffset: 500,
+    orientation: "right bottom",
+    format: 'yyyy-mm-dd'
+  /*
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+  */
+  });
   
 }
 
@@ -61,3 +84,9 @@ $(document).ready(function(){
     byScrolling();
     init_plugins();
 })
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});

@@ -1,3 +1,157 @@
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 320;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 280, 320;
+    stroke-dashoffset: -80;
+  }
+
+  to {
+    stroke-dasharray: 280, 320;
+    stroke-dashoffset: -300;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 320;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 280, 320;
+    stroke-dashoffset: -80;
+  }
+
+  to {
+    stroke-dasharray: 280, 320;
+    stroke-dashoffset: -300;
+  }
+}
+
+@-webkit-keyframes dash-small {
+  0% {
+    stroke-dasharray: 1, 160;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 140, 160;
+    stroke-dashoffset: -40;
+  }
+
+  to {
+    stroke-dasharray: 140, 160;
+    stroke-dashoffset: -150;
+  }
+}
+
+@keyframes dash-small {
+  0% {
+    stroke-dasharray: 1, 160;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 140, 160;
+    stroke-dashoffset: -40;
+  }
+
+  to {
+    stroke-dasharray: 140, 160;
+    stroke-dashoffset: -150;
+  }
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes notify {
+  0% {
+    box-shadow: 0 0 0px 0px #ffd4d4;
+  }
+
+  50% {
+    box-shadow: 0 0 10px 5px #ffd4d4;
+  }
+
+  to {
+    box-shadow: 0 0 0px 0px #ffd4d4;
+  }
+}
+
+@keyframes notify {
+  0% {
+    box-shadow: 0 0 0px 0px #ffd4d4;
+  }
+
+  50% {
+    box-shadow: 0 0 10px 5px #ffd4d4;
+  }
+
+  to {
+    box-shadow: 0 0 0px 0px #ffd4d4;
+  }
+}
+
 body,
 p,
 h1,

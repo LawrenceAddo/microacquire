@@ -1,0 +1,218 @@
+
+input.fancy, textarea.fancy {
+  padding: 0;
+  background: none;
+  display: block;
+  width: 100%;
+  border: none; border-radius: 0;
+  border-bottom: solid 1px $text-lightgrey;
+  line-height: 2em;
+  margin-top: 15px;
+  &:focus {outline: none; background: none; box-shadow: none;}
+  &, &:focus {
+    color: $text-lightgrey;
+    border: none; border-radius: 0;
+    border-bottom: solid 1px $text-lightgrey;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover, 
+  &:-webkit-autofill:focus
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover
+  &:-webkit-autofill:focus {
+    background: none !important;
+    -webkit-box-shadow: none !important;
+    @include transition(background-color 5000s ease-in-out 0s);
+  }
+
+  &::-webkit-input-placeholder {
+    color: $text-light;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover, 
+  &:-webkit-autofill:focus
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: $yellow;
+  }
+
+  .block-white & {
+    color: $text-dark;
+    border-color: $text-dark;
+
+    &::-webkit-input-placeholder {
+      color: $text-dark;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: $yellow;
+    }
+  }
+
+
+}
+
+
+.checkbox {
+  .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid $text-light;
+    .block-white & {border: 1px solid $text-dark;}
+    border-radius: 3px;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+    margin-top: 1px;
+
+    .cr-icon {
+      position: absolute;
+      font-size: .8em;
+      line-height: 0;
+      top: 50%;
+      left: 15%;
+    }
+
+  }
+
+  label {
+    cursor: pointer;
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+      &+.cr>.cr-icon {
+        opacity: 0;
+      }
+      &:checked+.cr>.cr-icon {
+        opacity: 1;
+      }
+      &:disabled+.cr {
+        opacity: .5;
+      }
+    }
+
+  }
+}
+
+
+form {
+  .shoes {margin-top: 30px;}
+}
+
+
+.fancy-slider {
+  .slick-list {height: $partial-slider-height;}
+  .slide-item img {height: $partial-slider-height; width: 100%; object-fit: cover; display: none;}
+  .slide-item.slick-slide img {display: block;}
+  .slick-prev, .slick-next {
+    width: 30px; height: 30px;
+    top: auto; bottom: -70px; left: 0;
+    z-index: 5;
+    &:before {display: none;}
+  }
+  .slick-prev {
+    &, &:hover, &:focus {background: url(#{$imgPath}/icons/slider-back.png) no-repeat;}
+  }
+  .slick-next {
+    &, &:hover, &:focus {background: url(#{$imgPath}/icons/slider-next.png) no-repeat; left: 50px;}
+  }
+  .slick-dots {
+    bottom: -55px; z-index: 1;
+    li button {
+      width: 10px; height: 10px; background-color: $text-lightgrey; border-radius: 100px;
+      &:before {display: none;}
+    }
+    li.slick-active button {background-color: $text-focus;}
+  } 
+}
+
+
+
+.char-counter {
+  text-align: left;
+  font-size: 12px;
+  .metre {font-size: 13px;}
+}
+
+ul.file-list {
+  list-style: none;
+  padding: 0;
+  > li {
+    padding: 5px 10px 5px 30px;
+    background: url(#{$imgPath}/icons/attached.png) no-repeat left center;
+  }
+  .item {
+    a.command {visibility: hidden; @include opacity(0); @include transition(all 100ms linear);}
+    &:hover {
+      a.command {visibility: visible; @include opacity(1);}
+    }  
+    a.command.item-del {color: #e00707d9;}
+    a.command.item-view {}
+  }
+  
+}
+
+.loading-overlay {
+    @include opacity(0.8);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: none;
+    z-index: 100;
+    body > & {
+        position: fixed;
+    }
+    .circle-loader-wrap {
+        @include absolute-center();
+    }
+    .circle-loader {
+        /*
+        stroke: #01cdaf;
+        stroke-width: 10;
+        fill: transparent;
+        stroke-linecap: round;
+        @include animation(dash 2s ease infinite, rotate 2s linear infinite);
+        */
+        
+        width: 100px;
+
+        background: $text-dark;
+        border-radius: 200%;
+    }
+}
+
+.loading-medium {
+    position: relative;
+    .loading-overlay {
+        background: none;
+        .circle-loader {
+            stroke-width: 5;
+            @include animation(dash-small 2s ease infinite, rotate 2s linear infinite);
+        }
+    }
+}
+
+.datepicker-wrapper {
+  position: relative;
+  .ticker {
+    position: absolute;
+    right: 8px;
+    bottom: 10px;
+  }
+}

@@ -1,0 +1,49 @@
+
+.btn {
+  border-radius: 500px;
+  border: solid 1px;
+  padding: 8px 35px;
+  font-size: 16px;
+
+  &:focus, &.focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &.btn-primary {
+    color: $text-light;
+    background-color: $blue;
+    border-color: $blue;
+  }
+
+  &.btn-highlight {
+    color: $text-light;
+    background-color: $bg-highlight;
+    border-color: $bg-highlight;
+  }
+
+  &.btn-wide {padding-left: 50px; padding-right: 50px;}
+}
+
+.btn-group {
+  .btn {border-radius: 5px; padding-top: 10px; padding-bottom: 10px;}
+  &.btn-twin-group {
+    display: flex;
+    .btn {
+      width: 50%;
+    }
+  }
+}
+
+.btn-group.highlight .btn {
+  color: $bg-highlight;
+  background: $bg-light;
+  border-color: $bg-light;
+  &.active {
+    color: $text-light;
+    background: $bg-highlight;
+    border-color: $bg-highlight;
+  }
+
+  &, &.focus, &.active {box-shadow: none;}
+}

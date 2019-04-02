@@ -23,7 +23,7 @@ $imgPath : "/images";
 
 $text-light: #ffffff;
 $text-lightgrey: #e0e1e1;
-$text-grey: #bcbcbc;
+$text-grey: #d8d8d8;
 $text-dark: #737373;
 $text-focus: #0da1ed;
 $text-highlight: #dbfcdc;
@@ -62,3 +62,101 @@ $partial-slider-height: 580px;
 @mixin link-color($color) {
     a, a:hover, a:visited, a:focus {color: $color;}
 }
+
+@mixin icon-check($color, $size, $thikness) {
+    display: inline-block;
+    width: $size; height: $size;
+    position: relative;
+    border-radius: 200%;
+    border: solid $thikness $color;
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 60%; height: 20%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      border-left: solid $thikness $color;
+      border-bottom: solid $thikness $color;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+    }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin box-shadow($v) {
+    -webkit-box-shadow: $v;
+    -moz-box-shadow: $v;
+    box-shadow: $v;
+}
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder{color: $color;}
+  &:-moz-placeholder{color: $color;}
+  &::-moz-placeholder{color: $color;}
+  &:-ms-input-placeholder{color: $color;}
+}
+
+@mixin transition($rule...) {
+    -webkit-transition: $rule;
+    -moz-transition: $rule;
+    -o-transition: $rule;
+    transition: $rule;
+}
+
+@mixin animation($anim...) {
+    -webkit-animation: $anim;
+    animation: $anim;
+}
+
+@mixin absolute-center() {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+     -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%); 
+          transform: translate(-50%, -50%);
+}
+
+@mixin opacity($v) {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $v*100 + ")";
+  filter: alpha(opacity=$v * 100);
+  -moz-opacity: $v;
+  -khtml-opacity: $v;
+  opacity: $v;
+}
+
+@mixin text-ellipsis() {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin text-shadow($v...) {
+    text-shadow: $v;
+}
+
+@mixin button-style($color) {
+  &, &.focus, &.active, &:focus {
+    &, &:focus, &:active {
+      color: #fff;
+      outline: none;
+      background: $color;
+      border-color: $color;
+      @include transition(all 250ms linear);
+
+      &:hover {
+        outline: none;
+        background: lighten( $color, 5% );
+        border-color: lighten( $color, 5% );
+      }
+    }
+  }
+}
+
+@import 'keyframes';

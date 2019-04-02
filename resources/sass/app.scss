@@ -8,6 +8,10 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import 'icons';
+@import 'buttons';
+@import 'controls';
+
 @import 'page';
 
 .navbar-laravel {

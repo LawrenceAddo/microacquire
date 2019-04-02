@@ -49092,7 +49092,15 @@ if (token) {
 // });
 
 
+window.SITE_URL = '';
+
 __webpack_require__(/*! ./layout */ "./resources/js/layout.js");
+
+__webpack_require__(/*! ./plugins */ "./resources/js/plugins.js");
+
+__webpack_require__(/*! ./notify */ "./resources/js/notify.js");
+
+__webpack_require__(/*! ./modal */ "./resources/js/modal.js");
 
 /***/ }),
 
@@ -49215,6 +49223,27 @@ function init_plugins() {
   if (jQuery().fancybox) {
     $(".fancybox").fancybox();
   }
+
+  $('textarea').each(function (i, o) {
+    var $obj = $(o);
+    if ($obj.length < 1) return;
+    var limitv = parseInt($(o).attr('limit'));
+    limitv = isNaN(limitv) ? 1000 : limitv;
+    $obj.typerLimit({
+      max_char_count: limitv,
+      label_char_left: $obj.parent().find('.char-counter .metre')
+    });
+  });
+  $('.datepicker').datepicker({
+    zIndexOffset: 500,
+    orientation: "right bottom",
+    format: 'yyyy-mm-dd'
+    /*
+      format: 'mm/dd/yyyy',
+      startDate: '-3d'
+    */
+
+  });
 }
 
 $(window).scroll(function () {
@@ -49225,6 +49254,583 @@ $(document).ready(function () {
   byScrolling();
   init_plugins();
 });
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modal.js":
+/*!*******************************!*\
+  !*** ./resources/js/modal.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * modal.js
+ *
+ * @author Wilson
+ */
+$.fn.redraw = function () {
+  var $modal = $(this);
+
+  if (!$modal.hasClass("modal")) {
+    return this;
+  }
+
+  if ($modal.parent().hasClass("note-dialog")) {
+    // Skip resizing
+    return this;
+  }
+
+  var windowHeight = window.innerHeight;
+  var $md = $modal.find(".modal-dialog");
+
+  if ($('body').hasClass('embed')) {
+    $md.css({
+      "margin-top": 200
+    });
+    return;
+  }
+
+  if ($modal.hasClass("vCenter")) {
+    var mdHeight; //start_timer();
+
+    mdHeight = $md.actual('outerHeight'); //end_timer("modal-dialog.actual(outerHeight)");
+
+    var marginTop = (windowHeight - mdHeight) / 2;
+    marginTop = marginTop < 10 ? 10 : marginTop;
+    marginBtm = marginTop == 10 ? 10 : 0;
+    $md.css({
+      "margin-top": marginTop,
+      "margin-bottom": marginBtm
+    });
+  } else if ($modal.hasClass("hRight")) {
+    var offset = 0;
+    offset += $md.find('.modal-header').actual("outerHeight");
+    offset += $md.find('.modal-footer').actual("outerHeight");
+    var $mb = $md.find('.modal-body');
+    offset += parseInt($mb.css("padding-top"));
+    offset += parseInt($mb.css("padding-bottom"));
+    $mb.height(windowHeight - offset);
+  }
+
+  return this;
+};
+
+$.bindModal = function (opts) {
+  var defaults = {
+    // 1. Configuration
+    // CSS selector
+    selector: false,
+    // jQuery Selector or Object
+    parent: false,
+    // Modal (css selector or DOM / jQuery object)
+    modal: false,
+    // boolean or the string 'static': Includes a modal-backdrop element. Alternatively, specify static for a backdrop which doesn't close the modal on click.
+    backdrop: 'static',
+    // boolean: Closes the modal when escape key is pressed
+    keyboard: false,
+    // boolean: Shows the modal when initialized.
+    show: false,
+    // 2. Events
+    // This event fires immediately when the show instance method is called. If caused by a click, the clicked element is available as the relatedTarget property of the event.
+    onShow: false,
+    // This event is fired when click Cancel
+    onCancel: false,
+    // This event is fired when click Save
+    onSave: false,
+    // This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete). If caused by a click, the clicked element is available as the relatedTarget property of the event.
+    onShown: false,
+    //This event is fired immediately when the hide instance method has been called.
+    onHide: false,
+    // This event is fired when the modal has finished being hidden from the user (will wait for CSS transitions to complete).
+    onHidden: false,
+    // This event is fired when the modal has loaded content using the remote option.
+    onLoaded: false,
+    // When you click Submit button in dialog
+    onSubmit: false,
+    // If this returns FALSE, nothing is fired
+    before: function before(e) {
+      return true;
+    }
+  };
+  opts = $.extend({}, defaults, opts);
+
+  if (typeof opts.modalId != "undefined" && opts.modalId != '') {
+    opts.modal = "#" + opts.modalId;
+  }
+
+  var $modal = $(opts.modal);
+  opts.modal = $modal;
+
+  if ($modal.data('is_modal_initialized')) {// already initialized
+  } else {
+    $modal.modal(opts);
+    $modal.data('is_modal_initialized', true);
+  }
+
+  if (opts.parent == false) {
+    // console.log("Warning: $.bind_modal should have parent.");
+    opts.parent = document;
+  }
+
+  if (opts.selector) {
+    $(opts.parent).off("click", opts.selector);
+    $(opts.parent).on("click", opts.selector, function (e) {
+      opts.delegator = e.currentTarget;
+
+      if (!opts.before(e)) {
+        return;
+      }
+
+      $modal.data("delegator", e.currentTarget).modal('show');
+    });
+  }
+
+  $modal.on("show.bs.modal", function (e) {
+    if (opts.onShow !== false) {
+      opts.onShow(e);
+    }
+
+    setTimeout(function () {
+      $modal.redraw();
+    }, 150);
+    /*if ( !$(this).hasClass("no-blur") ) {
+      setTimeout(function() {
+        $("body").addClass("blured");
+      }, 300);
+    }*/
+  });
+  $modal.on("shown.bs.modal", function (e) {
+    if (opts.onShown !== false) {
+      opts.onShown(e);
+    }
+  });
+  $modal.on("hide.bs.modal", function (e) {
+    /*if ( !$(this).hasClass("no-blur") ) {
+      $("body").removeClass("blured");
+    }*/
+    if (opts.onHide !== false) {
+      opts.onHide(e);
+    }
+  });
+  $modal.on("hidden.bs.modal", function (e) {
+    if (opts.onHidden !== false) {
+      opts.onHidden(e);
+    }
+  });
+  $modal.on("loaded.bs.modal", function (e) {
+    if (opts.onLoaded !== false) {
+      opts.onLoaded(e);
+    }
+  });
+
+  if (opts.onSubmit !== false) {
+    $modal.on("click", ".btn-submit", function (e) {
+      opts.delegator = $modal.data("delegator");
+      opts.onSubmit(e);
+      return false;
+    });
+  }
+
+  $modal.on("click", ".btn-save", function (e) {
+    $(this).attr('disabled', true);
+
+    if (opts.onSave !== false) {
+      opts.onSave(e);
+    }
+
+    return true;
+  });
+  $modal.on("click", ".btn-no", function (e) {
+    if (opts.onCancel !== false) {
+      opts.onCancel(e);
+    }
+
+    return true;
+  }).on("click", ".btn-cancel", function (e) {
+    if (opts.onCancel !== false) {
+      opts.onCancel(e);
+    }
+
+    return true;
+  }); // Modal Progress dots mapping
+
+  $modal.on('click', '.modal-title .back', function (e) {
+    e.preventDefault();
+    var $me = $(this);
+    var actAs = $me.attr('act-as');
+
+    if (actAs && $(actAs).length > 0) {
+      $(actAs).trigger('click');
+      return;
+    }
+  });
+  $modal.on('click', '.button-panel .pages a', function (e) {
+    e.preventDefault();
+    var $me = $(this),
+        $modal = $me.closest('.modal');
+    if ($me.parent().hasClass('active')) return;
+    var targetSelector = $me.data('target');
+
+    if (targetSelector) {
+      $modal.find('.curtain, .main').removeClass('on').end().find(targetSelector).addClass('on');
+    }
+
+    var actAs = $me.attr('act-as');
+
+    if (actAs && $(actAs).length > 0) {
+      $(actAs).trigger('click');
+      return;
+    }
+
+    var callBack = $me.attr('onclick');
+
+    if (callBack) {
+      try {
+        eval(callBack);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    return;
+  });
+  $modal.on('click', '.modal-header .back', function (e) {
+    e.preventDefault();
+    var $me = $(this);
+    var callBack = $me.attr('onclick');
+
+    try {
+      eval(callBack);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+};
+
+$.instantModal = function (type, text, buttonHtml, title, data) {
+  if (!text) {
+    return false;
+  } // Class of modal
+
+
+  var modalClass = 'modal modal-sccrol vCenter fade modal-' + type; // Find modal
+
+  var $modal = $(".modal-alert." + type);
+  /*
+  var is_html = (text.indexOf('<p') === 0 || text.indexOf('<div') === 0),
+      html = is_html ? text : '<p>' + text + '</p>';
+  */
+
+  if ($modal.length > 0) {
+    $modal.remove();
+  } // If not found, create this modal
+
+
+  var str_type = type.charAt(0).toUpperCase() + type.substr(1);
+  var modal_id = 'modal' + str_type;
+  var html = '<div class="' + modalClass + '" tabindex="-1" role="dialog" aria-labelledby="' + str_type + '" aria-hidden="true" id="' + modal_id + '">' + '<div class="modal-dialog">' + '<div class="modal-content">' + '<div class="modal-header">' + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>' + '</div>' + '<div class="modal-body">' + (title != false ? '<h4>' + title + '</h4>' : '') + '<div class="msg-content">' + text + '</div>' + '</div>' + '<div class="modal-footer">' + buttonHtml + '</div>' + '</div>' + '</div>' + '</div>';
+  $modal = $(html).appendTo('body'); // Show modal
+
+  $modal.modal({
+    backdrop: 'static',
+    keyboard: false
+  }).data('data', data).redraw();
+};
+
+$(window).on("resize", function (e) {
+  $(".modal.in").redraw();
+});
+
+/***/ }),
+
+/***/ "./resources/js/notify.js":
+/*!********************************!*\
+  !*** ./resources/js/notify.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var notify = {
+  timeInterval: 3000
+};
+/**
+ * Add inline message.
+ * @param  object jObj       The jquery object contains message.
+ * @param  string pos        The position class.
+ * @param  string msg        The message.
+ * @return void
+ */
+
+notify.inlineMsg = function (jObj, msg, pos, type) {
+  pos = pos || 'right';
+  type = type || 'error';
+  jObj.find('.msg').remove();
+  jObj.prepend('<div class="msg ' + type + ' ' + pos + '">' + msg + '</div>');
+  window.setTimeout(function () {
+    jObj.find('.msg').fadeOut();
+  }, notify.timeInterval);
+};
+/**
+ * Add inline message.
+ * @param  object jObj       The jquery object contains message.
+ * @param  string pos        The position class.
+ * @param  string msg        The message.
+ * @return void
+ */
+
+
+notify.inlineUpdateMsg = function (jObj, msg, pos, type) {
+  if (!jObj) {
+    return false;
+  }
+
+  var jParent = jObj.parent();
+  pos = pos || 'right';
+  type = type || 'error';
+  jParent.find('.msg').remove();
+  jParent.prepend('<div class="msg ' + type + ' ' + pos + '">' + msg + '</div>');
+  jObj.removeClass('error info success');
+  jObj.addClass(type);
+  jObj.focus();
+  window.setTimeout(function () {
+    jParent.find('.msg').fadeOut();
+    jObj.removeClass(type);
+  }, notify.timeInterval);
+};
+
+notify.errorPlacement = function ($ele, msg, type) {
+  if (!$ele || $ele.length == 0) {
+    return false;
+  }
+
+  type = type || 'error';
+  var eleId = $ele.attr("id") || 'unknown';
+  var $error = jQuery('<label id="' + eleId + '-error" class="' + type + '" for="' + eleId + '">' + msg + '</label>');
+  $ele.removeClass("error info success").addClass(type);
+
+  if ($ele.parent().is(".expanding-wrapper")) {
+    $ele.parent().next("label").filter(".error, .info, .success").remove();
+    $error.insertAfter($ele.parent());
+  } else {
+    $ele.parent().children("label").filter(".error, .info, .success").remove();
+
+    if (!$ele.parent().hasClass("validate-wrp")) {
+      $ele.wrap('<div class="validate-wrp"></div>');
+      $ele.parent().append($ele.parent().next(".select2-container"));
+    }
+
+    $ele.parent().append($error);
+  }
+
+  $ele.focus();
+  setTimeout(function () {
+    $error.fadeOut();
+    $ele.removeClass(type);
+  }, notify.timeInterval);
+};
+
+notify.errorPlacementCC = function ($ele, msg, type) {
+  if (!$ele || $ele.length == 0) {
+    return false;
+  }
+
+  type = type || 'error';
+  var eleId = $ele.attr("id") || 'unknown';
+  var $error = jQuery('<label id="' + eleId + '-error" class="' + type + '" for="' + eleId + '">' + msg + '</label>');
+  $ele.removeClass("error info success").addClass(type);
+
+  if ($ele.parent().is(".expanding-wrapper")) {
+    $ele.parent().next("label").filter(".error, .info, .success").remove();
+    $error.insertAfter($ele.parent());
+  } else {
+    $ele.parent().children("label").filter(".error, .info, .success").remove();
+
+    if (!$ele.parent().hasClass("validate-wrp")) {
+      $ele.wrap('<div class="validate-wrp"></div>');
+      $ele.parent().append($ele.parent().next(".select2-container"));
+    }
+
+    $ele.parent().append($error);
+  }
+};
+
+notify.alert = function (text, type, align, delay, width) {
+  if (typeof text == "undefined" || text == "") {
+    // biz.error("[notify.alert] Message is empty.");
+    return false;
+  }
+
+  align = align || 'right';
+  type = type || 'success';
+
+  if (type == "error") {
+    type = "danger";
+  }
+
+  if (text == null || typeof text == "undefined" || text == "") {
+    type = "danger";
+    text = "[2001] Empty message! Please contact the administrator.";
+  }
+
+  if (text == 'nullsubscription_error') {
+    text = "There was an issue creating your subscription. Please contact our support team for assistance.";
+  } // if this is not wrapped in HTML tags, wrap this in <p> tag
+  // if (text.substr(0, 1) != "<") {
+  //   text = '<p>' + text + '</p>';
+  // }
+
+
+  if (delay == undefined || delay == 0) {
+    var delays = {
+      success: 5000,
+      info: 10000,
+      warning: 10000,
+      danger: 10000
+    };
+
+    if (delays[type] != undefined) {
+      delay = delays[type];
+    } else {
+      delay = 20000;
+    }
+  }
+
+  var defaultWidth = 600;
+  width = width || defaultWidth;
+
+  if (window.innerWidth < width) {
+    width = window.innerWidth * 0.8;
+  }
+
+  jQuery.notify({
+    icon: 'glyphicon glyphicon-info-sign',
+    title: '',
+    message: text
+  }, {
+    position: 'fixed',
+    align: align,
+    type: type,
+    top: 36,
+    delay: delay,
+    width: width,
+    z_index: 100000
+  });
+};
+
+notify.clear = function () {
+  jQuery.notify.clear();
+};
+
+notify.error = function (text, align, delay, width) {
+  notify.alert(text, "danger", align, delay, width);
+};
+
+notify.warning = function (text, align, delay, width) {
+  notify.alert(text, "warning", align, delay, width);
+};
+
+notify.success = function (text, align, delay, width) {
+  notify.alert(text, "success", align, delay, width);
+};
+
+notify.info = function (text, align, delay, width) {
+  notify.alert(text, "info", align, delay, width);
+};
+
+notify.close = function () {
+  jQuery('.bootstrap-growl').alert('close');
+};
+
+window.notify = notify;
+
+/***/ }),
+
+/***/ "./resources/js/plugins.js":
+/*!*********************************!*\
+  !*** ./resources/js/plugins.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+String.prototype.replaceAll = function (search, replacement) {
+  var target = this;
+  return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+jQuery.fn.typerLimit = function (opts) {
+  var $me = jQuery(this);
+  $me.on('keyup', function (e) {
+    calcTextCount(e, $me, opts);
+  });
+  $me.on('keypress', function (e) {
+    calcTextCount(e, $me, opts);
+  });
+  $me.on('paste', function (e) {
+    var $me = jQuery(thi);
+    setTimeout(function () {
+      $me.trigger('keyup');
+    }, 100); // interval decreased
+  });
+  $me.trigger('keyup');
+};
+
+jQuery.fn.overlay = function (opts, anim) {
+  var opacity = 0;
+
+  if (typeof opts == "number") {
+    opts = {
+      opacity: opts
+    };
+  } else {
+    opts = opts || {};
+    opts.opacity = opts.opacity != undefined ? opts.opacity : 0.8;
+  }
+
+  var overlayClass = "loading-overlay"; // var $overlay = jQuery('<div><div class="circle-loader-wrap"><svg class="circle-loader" width="120" height="120" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50"></circle></svg></div></div>')
+  //     .addClass(overlayClass);
+
+  var $overlay = jQuery('<div><div class="circle-loader-wrap"><img class="circle-loader" src="' + SITE_URL + '/images/icons/loading 04.gif"></div></div>').addClass(overlayClass);
+  var $target = jQuery(this).hasClass("modal") ? jQuery(this).find(".modal-dialog") : jQuery(this);
+
+  if ($target.hasClass('loading-medium')) {
+    $overlay = jQuery('<div><div class="circle-loader-wrap"><svg class="circle-loader" width="60" height="60" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="20"></circle></svg></div></div>').addClass(overlayClass);
+  }
+
+  $overlay.prependTo($target);
+
+  if (anim != undefined) {
+    if (anim.duration == undefined) anim.duration = 400;
+    $overlay.css(opts);
+    $overlay.css(anim.from).stop().animate(anim.to);
+  } else {
+    $overlay.css(opts);
+  }
+
+  $target.addClass('loading');
+  return this;
+};
+
+jQuery.fn.overlayDone = function (anim) {
+  var $target = jQuery(this).hasClass("modal") ? jQuery(this).find(".modal-dialog") : jQuery(this);
+
+  if (anim != undefined && anim) {
+    if (anim.duration == undefined) anim.duration = 400;
+    $target.children(".loading-overlay").css(anim.from).animate(anim.to, anim.duration, function () {
+      jQuery(this).remove();
+    });
+  } else {
+    $target.children(".loading-overlay").remove();
+  }
+
+  $target.removeClass('loading');
+  return this;
+};
 
 /***/ }),
 
