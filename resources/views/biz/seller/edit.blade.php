@@ -123,7 +123,7 @@ seller-profile-edit
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <div class="input-group datepicker-wrapper">
-                        <input type="text" class="form-control fancy datepicker" placeholder="Date founded" name="date_founded" value="{{ $selling->date_founded }}">
+                        <input type="text" class="form-control fancy datepicker" placeholder="Date founded" name="date_founded" value="{{ $selling->date_founded }}"  autocomplete="off">
                         <i class="fa fa-angle-down ticker"></i>
                     </div>
                 </div>
