@@ -159,4 +159,15 @@ $partial-slider-height: 580px;
   }
 }
 
+@mixin round-ball($color, $bg-color, $border-color, $size) {
+  padding: 0;
+  text-align: center;
+  background-color: $bg-color;
+  width: $size; height: $size;
+  line-height: $size;
+  border-radius: 200%;
+  border: solid 1px $border-color;
+  color: $color;
+}
+
 @import 'keyframes';

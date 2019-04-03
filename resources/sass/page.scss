@@ -4,6 +4,8 @@ body, p, h1, h2, h3, h4, h5, h6{
     font-family: 'Montserrat', sans-serif;
 }
 
+ul {padding: 0;}
+
 .logo img.img-responsive {
     height: 30px;
 }
@@ -58,12 +60,21 @@ body {
     background-size: 100% 124px;
   }
 
-  .seller-profile & {
-    background-image: url(#{$imgPath}/pages/banner-profile.png);
+  .seller-profile-view & {
+    background-image: url(#{$imgPath}/pages/banner-seller-view.png);
     background-size: cover;
   }
   .seller-profile-edit & {
-    background-image: url(#{$imgPath}/pages/banner-edit-seller.png);
+    background-image: url(#{$imgPath}/pages/banner-seller-edit.png);
+    background-size: cover;
+  }
+
+  .buyer-profile-view & {
+    background-image: url(#{$imgPath}/pages/banner-buyer-view.png);
+    background-size: cover;
+  }
+  .buyer-profile-edit & {
+    background-image: url(#{$imgPath}/pages/banner-buyer-edit.png);
     background-size: cover;
   }
 
@@ -292,6 +303,9 @@ body {
     }
   }
 }
+
+
+.social-list li:first-child .item-del {display: none;}
 
 
 @media(max-height:900px)

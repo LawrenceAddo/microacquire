@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Profiles;
+use App\Socials;
 use App\SellingProps;
 
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +12,67 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController  extends Controller
 {
+
+
     //
+
+    public function view() {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+        
+        if ($user->type == 0) {
+            return $this->sellerView();
+        } else if ($user->type == 1) {
+
+        } else if ($user->type == 2) {
+            // admin
+        } else {
+            // oops. what the hell?
+        }
+    }
+
+    public function edit() {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+        
+        if ($user->type == 0) {
+            return $this->sellerEdit();
+        } else if ($user->type == 1) {
+            return $this->buyerEdit();
+        } else if ($user->type == 2) {
+            // admin
+        } else {
+            // oops. what the hell?
+        }
+    }
+
+    public function save(Request $request) {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+        
+        if ($user->type == 0) {
+            return $this->sellerSave($request);
+        } else if ($user->type == 1) {
+            return $this->buyerSave($request);
+        } else if ($user->type == 2) {
+            // admin
+        } else {
+            // oops. what the hell?
+        }
+    }
+
+    // 
+    /*
+     *
+     *** Seller Related ***
+     *
+     */
     private function getSellingPropByUser($user) {
 
         if ($user->sellings->isEmpty()) {
@@ -50,7 +112,7 @@ class ProfileController  extends Controller
         return $selling;
     }
 
-    public function sellerView()
+    private function sellerView()
     {
         $user = Auth::user();
         if (!$user) {
@@ -60,12 +122,12 @@ class ProfileController  extends Controller
         $selling = $this->getSellingPropByUser($user);
 
         return view('biz.seller.profile', [
-            'page_class' => 'seller-profile-view',
             'selling' => $selling,
+            'show_contact' => ($user->type == 0) ? false : true,
         ]);
     }
 
-    public function sellerEdit()
+    private function sellerEdit()
     {
         $user = Auth::user();
         if (!$user) {
@@ -75,12 +137,11 @@ class ProfileController  extends Controller
         $selling = $this->getSellingPropByUser($user);
 
         return view('biz.seller.edit', [
-            'page_class' => 'seller-profile-edit',
             'selling' => $selling,
         ]);
     }
 
-    public function sellerSave(Request $request)
+    private function sellerSave(Request $request)
     {
         $resp = array(
             'status' => 1,
@@ -104,6 +165,17 @@ class ProfileController  extends Controller
         $selling = SellingProps::firstOrCreate(
             ['user_id' => $userId]
         );
+        
+        $this->sellerFilling($selling, $data);
+
+        $selling->save();
+
+        return response()->json($resp);
+    }
+
+    private function sellerFilling($selling, $data)
+    {
+        
         $sellingId = $selling->id;
 
         $fields = explode(',', 'name,description,metrics,revenue,date_founded,customers_cnt,price,reason,growth,highlights,fi_info,team,support');
@@ -188,8 +260,93 @@ class ProfileController  extends Controller
         $selling->status = (($data['submit_type'] == '0') ? 0 : 2);
         $selling->others = '';
 
-        $selling->save();
+        return $selling;
+    }
+
+    //
+    /*
+     *
+     *** Buyer Related ***
+     *
+     */
+    private function getBuyerPropByUser($user) {
+
+        if (is_null($user->profile)) {
+            $profile = new Profiles(['user_id' => $user->id]);
+        } else {
+            $profile = $user->profile;
+        }
+
+        return $profile;
+    }
+
+    private function buyerEdit()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+
+        $buyer = $this->getBuyerPropByUser($user);
+
+        return view('biz.buyer.edit', [
+            'buyer' => $buyer,
+        ]);
+    }
+
+    private function buyerSave(Request $request)
+    {
+        $resp = array(
+            'status' => 1,
+            'name' => '',
+            'path' => '',
+            'url' => '',
+            'msg' => '',
+        );
+
+        $user = Auth::user();
+        $userId = $user->id;
+
+        if (!$user) {
+            $resp['status'] = 0;
+            $resp['redirect'] = route('login');
+            return response()->json($resp);   
+        }
+
+        $data = $request->all();
+
+        $profile = Profiles::firstOrCreate(
+            ['user_id' => $userId]
+        );
+        
+        $profile->company_name = $data['name'];
+        $profile->company_description = $data['description'];
+        $profile->interests = $data['interests'];
+        $profile->status = (($data['submit_type'] == '0') ? 0 : 2);
+
+        $profile->save();
+
+        $profile->allSocials()->update(['status' => 0]); // disable all socials first
+        $seq = count($data['social_names']);
+        for ($i=0; $i<count($data['social_names']); $i++) {
+            $stype = $data['social_names'][$i];
+            $url = $data['social_urls'][$i];
+            if ($stype && $url) {
+                // 
+                $item = Socials::firstOrNew([
+                    'ref_id' => $profile->user_id, 
+                    'ref_type' => 0, 
+                    'social_type' => $stype,
+                ]);
+                $item->social_url = $url;
+                $item->status = 1;
+                $item->seq = $seq;
+                $item->save();
+                $seq --;
+            }
+        }
 
         return response()->json($resp);
     }
+
 }

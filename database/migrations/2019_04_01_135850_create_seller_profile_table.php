@@ -40,7 +40,7 @@ class CreateSellerProfileTable extends Migration
             $table->text('images')->nullable();;
             $table->integer('images_cnt')->nullable();;
 
-            $table->integer('status')->default(0);
+            $table->smallInteger('status')->default(0);
 
             $table->timestamps();
         });

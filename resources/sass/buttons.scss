@@ -22,7 +22,14 @@
     border-color: $bg-highlight;
   }
 
+  &.btn-white {
+    color: $blue;
+    background-color: $bg-light;
+    border-color: $bg-light;
+  }
+
   &.btn-wide {padding-left: 50px; padding-right: 50px;}
+  &.tight {padding-top: 4px; padding-bottom: 4px; font-size: 14px;}
 }
 
 .btn-group {

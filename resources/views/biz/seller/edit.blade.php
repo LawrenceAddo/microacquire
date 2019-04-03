@@ -5,23 +5,19 @@
     @parent
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/slick/slick-theme.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/fancybox/jquery.fancybox.css?v=2.1.5"/>
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/dropzone/dropzone.css"/>
 @endsection
 
 @section('js_import')
     @parent
 
-    <script type="text/javascript" src="{{ url('/') }}/js/bootstrap-notify/bootstrap-notify.min.js"></script>
-
     <script type="text/javascript" src="{{ url('/') }}/js/jquery.mousewheel.pack.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/slick/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
     
     <script type="text/javascript" src="{{ url('/') }}/js/dropzone/dropzone.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/js/jquery.actual/jquery.actual.min.js"></script>
 
-    <script type="text/javascript" src="{{ url('/') }}/js/seller-profile-edit.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/pages/seller-profile-edit.js"></script>
 @endsection
 
 @section('body_class')
@@ -40,7 +36,7 @@ seller-profile-edit
         Curabitur dignissim ex in pellentesque porta.
     @endcomponent
 
-<form method="POST" action="{{ route('seller_save') }}" id="frm_seller_save">
+<form method="POST" action="{{ route('profile_save') }}" id="frm_seller_save">
     <input type="hidden" name="submit_type" value="0" id="submit_type">
     @component('comps.block')
         
@@ -238,8 +234,8 @@ seller-profile-edit
                 <div class="col-md-12 col-sm-12 text-center">
                     @component('comps.checkbox')
                         @slot('checked') @endslot
-                        @slot('name') iagree @endslot
                         @slot('id') iagree @endslot
+
                         You agree to our <a href="#">Terms of Service</a> and have read and understood the <a href="#">Privacy Policy</a>
                     @endcomponent
                 </div>

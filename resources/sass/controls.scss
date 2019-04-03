@@ -1,5 +1,6 @@
 
 input.fancy, textarea.fancy {
+
   padding: 0;
   background: none;
   display: block;
@@ -9,10 +10,15 @@ input.fancy, textarea.fancy {
   line-height: 2em;
   margin-top: 15px;
   &:focus {outline: none; background: none; box-shadow: none;}
-  &, &:focus {
+  &, &:focus, &[readonly] {
     color: $text-lightgrey;
     border: none; border-radius: 0;
     border-bottom: solid 1px $text-lightgrey;
+  }
+  &:disabled {
+    color: $text-grey;
+    border: none; border-radius: 0;
+    border-bottom: solid 1px $text-grey;
   }
 
   &:-webkit-autofill,
@@ -148,9 +154,10 @@ form {
   .metre {font-size: 13px;}
 }
 
+a.command.item-del {color: #e00707d9;}
+
 ul.file-list {
   list-style: none;
-  padding: 0;
   > li {
     padding: 5px 10px 5px 30px;
     background: url(#{$imgPath}/icons/attached.png) no-repeat left center;
@@ -159,11 +166,27 @@ ul.file-list {
     a.command {visibility: hidden; @include opacity(0); @include transition(all 100ms linear);}
     &:hover {
       a.command {visibility: visible; @include opacity(1);}
-    }  
-    a.command.item-del {color: #e00707d9;}
-    a.command.item-view {}
+    }
   }
-  
+}
+
+ul.social-list {
+  list-style: none;
+  a.command {
+    &.item-del {
+      @include round-ball($text-light, #9e9a9a, #9e9a9a, 30px);
+      position: absolute; 
+      right: -20px;
+      bottom: 0;
+    }
+
+    &.item-handler {
+      position: absolute; 
+      left: -10px; 
+      bottom: 0;
+      color: $text-light;
+    }
+  }
 }
 
 .loading-overlay {
@@ -214,5 +237,21 @@ ul.file-list {
     position: absolute;
     right: 8px;
     bottom: 10px;
+  }
+}
+
+.select2-container--default .select2-selection--single {
+  border: none; border-radius: 0;
+  border-bottom: solid 1px $text-lightgrey;
+  background: none;
+  line-height: 2em;
+  &:focus {outline: none;}
+  .select2-selection__rendered, .select2-selection__placeholder {color: $text-lightgrey;}
+  .select2-selection__arrow b {border-color: $text-lightgrey transparent transparent transparent;}
+}
+
+.fancy-widget {
+  &.select2-dropdown {
+    font-size: 12px;
   }
 }

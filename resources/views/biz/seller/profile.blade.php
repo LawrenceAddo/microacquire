@@ -5,17 +5,17 @@
     @parent
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/slick/slick-theme.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/fancybox/jquery.fancybox.css?v=2.1.5"/>
 @endsection
 
 @section('js_import')
     @parent
     <script type="text/javascript" src="{{ url('/') }}/js/jquery.mousewheel.pack.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/slick/slick.min.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/js/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
 @endsection
 
-    
+@section('body_class')
+seller-profile-view
+@endsection
 
 @section('content')
     
@@ -179,54 +179,59 @@
         </div>
     @endcomponent
 
-    @component('comps.block')
+    @if ($show_contact)
+
+        @component('comps.block')
         
-        @slot('block_name')
-            contact
-        @endslot
+            @slot('block_name')
+                contact
+            @endslot
 
-        @slot('block_class')
-            block-highlight no-triangle
-        @endslot
+            @slot('block_class')
+                block-highlight no-triangle
+            @endslot
 
-        <div class="col-md-12 col-sm-12">
-            <h2 class="with-subheading">Interested in this company?</h2>
-            <p class="subheading">Contact this seller to know more about this company</p>
+            <div class="col-md-12 col-sm-12">
+                <h2 class="with-subheading">Interested in this company?</h2>
+                <p class="subheading">Contact this seller to know more about this company</p>
 
-            <form>
-                <div class="row">
-                    <div class="col-md-4 col-sm-12">
-                        <input type="text" placeholder="Complete Name" value="" class="form-control fancy">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <input type="text" placeholder="Complete Name" value="" class="form-control fancy">
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <input type="text" placeholder="Email Address" value="" class="form-control fancy">
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <input type="text" placeholder="Phone Number" value="" class="form-control fancy">
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <textarea placeholder="Your Message" class="fancy" rows="3"></textarea>
+                            <p class="char-counter"><span class="metre">0</span> character left</p>
+                        </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
-                        <input type="text" placeholder="Email Address" value="" class="form-control fancy">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            @component('comps.checkbox')
+                                @slot('checked') @endslot
+                                @slot('name') iagree @endslot
+                                @slot('id') iagree @endslot
+                                You agree to our <a href="#">Terms of Service</a> and have read and understood the <a href="#">Privacy Policy</a>
+                            @endcomponent
+                        </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
-                        <input type="text" placeholder="Phone Number" value="" class="form-control fancy">
+                    <div class="row shoes">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </div>
                     </div>
-                    <div class="col-md-12 col-sm-12">
-                        <textarea placeholder="Your Message" class="fancy" rows="3"></textarea>
-                        <p class="char-counter"><span class="metre">0</span> character left</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 text-center">
-                        @component('comps.checkbox')
-                            @slot('checked') @endslot
-                            @slot('name') iagree @endslot
-                            @slot('id') iagree @endslot
-                            You agree to our <a href="#">Terms of Service</a> and have read and understood the <a href="#">Privacy Policy</a>
-                        @endcomponent
-                    </div>
-                </div>
-                <div class="row shoes">
-                    <div class="col-md-12 col-sm-12 text-center">
-                        <input type="submit" value="Submit" class="btn btn-primary">
-                    </div>
-                </div>
-            </form>
-        </div>
-    @endcomponent
+                </form>
+            </div>
+        @endcomponent    
+
+    @endif
+
 
 
 @endsection
