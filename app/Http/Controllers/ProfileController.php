@@ -25,7 +25,7 @@ class ProfileController  extends Controller
         if ($user->type == 0) {
             return $this->sellerView();
         } else if ($user->type == 1) {
-
+            return $this->buyerView();
         } else if ($user->type == 2) {
             // admin
         } else {
@@ -278,6 +278,20 @@ class ProfileController  extends Controller
         }
 
         return $profile;
+    }
+
+    private function buyerView()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+
+        $buyer = $this->getBuyerPropByUser($user);
+
+        return view('biz.buyer.profile', [
+            'buyer' => $buyer
+        ]);
     }
 
     private function buyerEdit()
