@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6cb5e4f71df9a0204999d6b83a1ef43f",
-    "content-hash": "00c5c7cff3124498b600e0f4bfc777aa",
+    "hash": "f3e98bdba08c12826e54fa592b1d0078",
+    "content-hash": "a10f99ad0bfe4aaa235ba51301060069",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -401,7 +401,7 @@
             "time": "2019-03-30 21:42:01"
         },
         {
-            "name": "endroid/qrcode",
+            "name": "endroid/qr-code",
             "version": "3.5.8",
             "source": {
                 "type": "git",
@@ -461,7 +461,6 @@
                 "qr",
                 "qrcode"
             ],
-            "abandoned": "endroid/qr-code",
             "time": "2019-04-03 21:14:10"
         },
         {
@@ -2367,16 +2366,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.10.0",
+            "version": "v1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
+                "reference": "82ebae02209c21113908c229e9883c419720738a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
-                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
+                "reference": "82ebae02209c21113908c229e9883c419720738a",
                 "shasum": ""
             },
             "require": {
@@ -2388,7 +2387,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9-dev"
+                    "dev-master": "1.11-dev"
                 }
             },
             "autoload": {
@@ -2421,7 +2420,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2018-08-06 14:22:27"
+            "time": "2019-02-06 07:57:58"
         },
         {
             "name": "symfony/polyfill-iconv",
