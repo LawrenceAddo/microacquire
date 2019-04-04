@@ -3,12 +3,15 @@
 
 @section('css_import')
     @parent
-    
+    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/js/slick/slick-theme.css"/>
 @endsection
 
 @section('js_import')
     @parent
-
+    <script type="text/javascript" src="{{ url('/') }}/js/jquery.mousewheel.pack.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/pages/buyer-profile-view.js"></script>
 @endsection
 
 @section('body_class')
@@ -60,15 +63,16 @@ buyer-profile-edit
 
             <h2>Social Media</h2>
             
-            <div class="social-slide">
-                <div class="slide-inner">
+            <div class="social-slide-wrapper">
+                <div class="slide-inner" style="max-width: 800px; margin: auto;">
                     
-                    <div id="social_slide" class="fancy-slider">
+                    <div id="social_slide" class="fancy-slider not-common items2-type">
                         @foreach ($buyer->socials as $social)
-                            @if($social->social_url)
-                                {{ $social->social_type }} <br>
-                                {{ $social->social_url }}
-                            @endif
+                            <div class="social-item" style="padding: 0 20px;">
+                                <h3>{{ ucfirst($social->social_type) }}</h3>
+                                <p>{{ $social->social_url }}</p>
+                                <img src="{{ route('qrcode') }}?d={{ urlencode($social->social_url) }}&c=252525&b=aaaaaa&s=100" class="d-inline-block">
+                            </div>  
                         @endforeach
                     </div>
 

@@ -84,7 +84,7 @@ seller-profile-view
         <div class="col-md-6 col-sm-12 slide-col">
             <div class="slide-inner">
                 
-                <div id="gallery_slide" class="fancy-slider">
+                <div id="gallery_slide" class="fancy-slider metric-gallery-slider">
                     @foreach ($selling->images as $img)
                         @if($img['path'])
                             <div class="slide-item">

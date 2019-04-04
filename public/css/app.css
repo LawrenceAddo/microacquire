@@ -11080,12 +11080,27 @@ form .shoes {
   margin-top: 30px;
 }
 
-.fancy-slider .slick-list {
+.fancy-slider.metric-gallery-slider .slick-list {
   height: 580px;
 }
 
-.fancy-slider .slide-item img {
+.fancy-slider.metric-gallery-slider .slide-item img {
   height: 580px;
+}
+
+.fancy-slider.items3-type .slick-list:nth-child(3n) {
+  text-align: right;
+}
+
+.fancy-slider.items2-type .slick-slide:nth-child(2n) {
+  text-align: right;
+}
+
+.fancy-slider.items2-type .slick-slide:nth-child(2n+1) {
+  text-align: left;
+}
+
+.fancy-slider .slide-item img {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;

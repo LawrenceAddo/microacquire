@@ -121,8 +121,25 @@ form {
 
 
 .fancy-slider {
-  .slick-list {height: $partial-slider-height;}
-  .slide-item img {height: $partial-slider-height; width: 100%; object-fit: cover; display: none;}
+  &.metric-gallery-slider {
+    .slick-list {height: $partial-slider-height;}
+    .slide-item img {height: $partial-slider-height;}
+  }
+  &.items3-type {
+    .slick-list:nth-child(3n) {
+      text-align: right;
+    }
+  }
+  &.items2-type {
+    .slick-slide:nth-child(2n) {
+      text-align: right;
+    }
+    .slick-slide:nth-child(2n+1) {
+      text-align: left;
+    }
+  }
+
+  .slide-item img {width: 100%; object-fit: cover; display: none;}
   .slide-item.slick-slide img {display: block;}
   .slick-prev, .slick-next {
     width: 30px; height: 30px;

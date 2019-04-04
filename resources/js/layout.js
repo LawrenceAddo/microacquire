@@ -38,6 +38,7 @@ function byScrolling() {
 function init_plugins() {
   if(jQuery().slick) {
     $('.fancy-slider').each(function(i, o) {
+      if ($(o).hasClass('not-common')) return true;
       $(o).slick({
         dots: true
       });
@@ -61,14 +62,16 @@ function init_plugins() {
 
   });
 
-  $('.datepicker').datepicker({
-    zIndexOffset: 500,
-    orientation: "right bottom",
-    format: 'yyyy-mm-dd'
-  /*
-    format: 'mm/dd/yyyy',
-    startDate: '-3d'
-  */
+  $('datepicker').each(function(i, o){
+    $(o).datepicker({
+      zIndexOffset: 500,
+      orientation: "right bottom",
+      format: 'yyyy-mm-dd'
+    /*
+      format: 'mm/dd/yyyy',
+      startDate: '-3d'
+    */
+    });
   });
   
 }

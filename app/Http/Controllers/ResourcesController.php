@@ -7,6 +7,11 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\LabelAlignment;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Response\QrCodeResponse;
+
 class ResourcesController extends Controller
 {
     //
@@ -67,5 +72,49 @@ class ResourcesController extends Controller
             return response()->file(Storage::path($path));
             // return Storage::download($path);
         }
+    }
+
+    public function qrcode(Request $request) {
+        $data = $request->all();
+
+        $fore_color = getArrayVar($data, 'c', '#000000');
+        $bg_color = getArrayVar($data, 'b', '#ffffff');
+        $text = getArrayVar($data, 'd', '');
+        $size = getArrayVar($data, 's', 300);
+        $padding = getArrayVar($data, 'p', 0);
+
+        $fore_color = hex2rgb($fore_color, 1, 1);
+        $bg_color = hex2rgb($bg_color, 1, 1);
+
+        $qrCode = new QrCode();
+        $qrCode->setText($text);
+        $qrCode->setSize($size);
+        $qrCode->setMargin($padding);
+        $qrCode->setEncoding('UTF-8');
+        $qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
+        $qrCode->setForegroundColor($fore_color);
+        $qrCode->setBackgroundColor($bg_color); // array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0)
+        /*
+        $qrCode->setLabel('Scan the code', 16, null, LabelAlignment::CENTER);
+        $qrCode->setLogoPath(__DIR__.'/../assets/images/symfony.png');
+        $qrCode->setLogoSize(150, 200);
+        $qrCode->setRoundBlockSize(true);
+        */
+        $qrCode->setValidateResult(false);
+        $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
+
+        // Directly output the QR code
+        return response($qrCode->writeString())
+            ->header('Content-Type', $qrCode->getContentType());
+        
+        /*
+        // now we can directly output the qrcode
+        header('Content-Type: '.$qrCode->getContentType());
+        $qrCode->render();
+        
+
+        // or create a response object
+        $response = new Response($qrCode->get(), 200, array('Content-Type' => $qrCode->getContentType()));
+        */
     }
 }

@@ -3,5 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/css/home.css": "/css/home.css",
     "/js/pages/buyer-profile-edit.js": "/js/pages/buyer-profile-edit.js",
+    "/js/pages/buyer-profile-view.js": "/js/pages/buyer-profile-view.js",
     "/js/pages/seller-profile-edit.js": "/js/pages/seller-profile-edit.js"
 }

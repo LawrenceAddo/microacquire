@@ -36,3 +36,4 @@ Route::post('/users/profile/save', 'ProfileController@save')->name('profile_save
 Route::post('/upload/temp', 'ResourcesController@uploadToTemp')->name('upload_temp');
 
 Route::get('/res/selling/{id}/{sub_path}', 'ResourcesController@getSellerSpecific')->where('sub_path', '.*');
+Route::get('/qrcode', 'ResourcesController@qrcode')->name('qrcode');
