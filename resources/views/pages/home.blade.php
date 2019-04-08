@@ -5,7 +5,7 @@
   <div class="banner-section" style="background-image: url(/images/home/banner.png); min-height: 800px">
       <div class="private-and-anonymous">
         <div class="cust-desc">
-          <h2>Private and Anonymous<br>Saas M&A Marketplace</h2>
+          <h2>Privately Sell Your Startup.<br>Get Offers In 30-Days.</h2>
           <p>We connect buyers and sellers of SaaS based startups. Sell or buy a startup anonymously today.</p>
           <ul class="cust-btns">
             <li><a class="apply-to-join">Apply to Join</a></li>
@@ -32,28 +32,28 @@
             <div class="inner">
               <img src="/images/home/checklist.png">
               <h3>Apply <br>to network</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Startups and acquirers are pre-vetted for quality privately and anonymously.</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="inner">
               <img src="/images/home/group.png">
               <h3>Find <br>opportunties</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut .</p>
+              <p>Meet with buyers and receive an LOI within 30-days after submitting your startup.</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="inner">
               <img src="/images/home/discussion.png">
               <h3>Discuss deal <br> terms</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+              <p>Work to sell your startup on your own terms. No bankers, no brokers, no middlemen.</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="inner">
               <img src="/images/home/checque.png" class="adjust-12px-abov">
               <h3>Close<br> the deal</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p>Sell your company without paying a 10-15% commission fee. Maximize your outcome.</p>
             </div>
         </div>
       </div>
@@ -93,7 +93,7 @@
   <div class="why-chooes-us">
     <div class="dash-decorator"></div>
     <div class="container">
-      <h2>Why Chooes us?</h2>
+      <h2>Why Use MicroAcquire?</h2>
       <div class="row">
         <div class="col-md-6 why-chooes-us-left">
             <div class="row">
@@ -102,10 +102,10 @@
                 <span class="cust-sell-compny">to sell your company</span>
               </div>
               <div class="col-md-6 why-chooes-us-sub-right">
-                  <p>Very hard</p>
-                  <p>Expensive</p>
-                  <p>Time consuming </p>
-                  <p>Slow</p>
+                  <p>Retain a broker</p>
+                  <p>Meet potential buyers</p>
+                  <p>10-15% brokerage fee</p>
+                  <p>Expensive and exhausting</p>
               </div>
             </div>
         </div>
@@ -116,8 +116,8 @@
                 <img src="/images/home/microacquire.png" alt="" class="img-responsive">
               </div>
               <div class="col-md-6 why-chooes-us-sub-right">
-                <h3>new way</h3>
-                <span class="cust-sell-compny-new">to sell your company</span>
+                <h3>30-days</h3>
+                <span class="cust-sell-compny-new">LOI in hand</span>
               </div>
             </div>
         </div>
@@ -170,22 +170,22 @@
       <div class="row">
         <div class="col-md-3 col-sm-6">
           <img src="/images/home/one.png">
-          <h3>Private & <br>Anonymous</h3>
+          <h3>Legal<br>Partners</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
         </div>
         <div class="col-md-3 col-sm-6">
           <img src="/images/home/second.png">
-          <h3>Algorithmic <br>Matches </h3>
+          <h3>Growth<br>Parnters</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut .</p>
         </div>
         <div class="col-md-3 col-sm-6">
           <img src="/images/home/third.png">
-          <h3>Opportunistic <br>Inbound</h3>
+          <h3>Technical <br>Partners</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
         </div>
         <div class="col-md-3 col-sm-6">
           <img src="/images/home/fourth.png">
-          <h3>Active in <br>36 Countries</h3>
+          <h3>Startup<br>Mentors</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
         </div>
       </div>
