@@ -6,6 +6,8 @@ use App\Profiles;
 use App\Socials;
 use App\SellingProps;
 
+use View;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +17,11 @@ class ProfileController  extends Controller
 
 
     //
+    public function __construct() {
+       parent::__construct();
+
+       View::share ( '_currentPage', 'profile');
+    }
 
     public function view() {
         $user = Auth::user();
@@ -73,6 +80,15 @@ class ProfileController  extends Controller
      *** Seller Related ***
      *
      */
+    private function refineSellingProp($selling) {
+
+        if (!$selling) return $selling;
+
+        //
+
+        return $selling;
+    }
+
     private function getSellingPropByUser($user) {
 
         if ($user->sellings->isEmpty()) {
@@ -81,34 +97,13 @@ class ProfileController  extends Controller
             $selling = $user->sellings->first();
         }
 
+        $selling = $this->refineSellingProp($selling);
+        return $selling;
+    }
 
-        $imgs_sending = array();
-        $imgs_original = json_decode($selling->images, true);
-        if ($imgs_original && is_array($imgs_original)) {
-
-            foreach ($imgs_original as $img) {
-                $imgs_sending[] = [
-                    'path' => $img,
-                    'url' => getResourceUrl($selling->id, 'selling', ($img ? 'demos/' . $img : null)),
-                ];
-            }
-        }
-        $selling->images = $imgs_sending;
-
-        $pdf_sending = array();
-        $pdf_original = json_decode($selling->files, true);
-        if ($pdf_original && is_array($pdf_original)) {
-
-            foreach ($pdf_original as $pdf) {
-                $pdf_sending[] = [
-                    'name' => $pdf['name'],
-                    'path' => $pdf['path'],
-                    'url' => getResourceUrl($selling->id, 'selling', 'pdfs/' . ($pdf['path'] ? $pdf['path'] : null)),
-                ];
-            }
-        }
-        $selling->files = $pdf_sending;
-
+    private function getSellingPropById($id) {
+        $selling = SellingProps::find($id);
+        $selling = $this->refineSellingProp($selling);
         return $selling;
     }
 
@@ -263,6 +258,71 @@ class ProfileController  extends Controller
         return $selling;
     }
 
+    public function sellers() {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+        
+        //
+        return view('biz.seller.list', [
+            '_currentPage' => 'sellers',
+        ]);
+    }
+
+    public function sellersSearch(Request $request) {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json([
+                'redirect' => route('login'),
+            ]);
+        }
+        
+        //
+        $data = $request->all();
+
+        $rev0 = getArrayVar($data, 'r0', '');
+        $rev1 = getArrayVar($data, 'r1', '');
+        $cost0 = getArrayVar($data, 'c0', '');
+        $cost1 = getArrayVar($data, 'c1', '');
+        $isFeatured = getArrayVar($data, 'f', 0); // ???
+        $q = getArrayVar($data, 'q', '');
+
+        $sellers = SellingProps::where('name', 'LIKE', '%' . $q . '%');
+        if ($rev0 != '') {
+            $sellers = $sellers->where('revenue', '>=', $rev0);
+        }
+        if ($rev1 != '') {
+            $sellers = $sellers->where('revenue', '<=', $rev1);
+        }
+        if ($cost0 != '') {
+            $sellers = $sellers->where('price', '>=', $cost0);
+        }
+        if ($cost1 != '') {
+            $sellers = $sellers->where('price', '<=', $cost1);
+        }
+        $sellers = $sellers->paginate(9);
+
+
+        return response()->json($sellers);
+    }
+
+    public function sellerViewById(Request $request, $id)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+
+        $selling = $this->getSellingPropById($id);
+
+        return view('biz.seller.profile', [
+            'selling' => $selling,
+            'show_contact' => true,
+            '_currentPage' => '',
+        ]);
+    }
+
     //
     /*
      *
@@ -360,6 +420,27 @@ class ProfileController  extends Controller
             }
         }
 
+        return response()->json($resp);
+    }
+
+    public function buyers() {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+        
+        //
+    }
+
+    public function buyersSearch() {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json([
+                'redirect' => route('login'),
+            ]);
+        }
+        
+        //
         return response()->json($resp);
     }
 

@@ -117,4 +117,30 @@ class ResourcesController extends Controller
         $response = new Response($qrCode->get(), 200, array('Content-Type' => $qrCode->getContentType()));
         */
     }
+
+
+    function emptyAvatar(Request $request) {
+        $data = $request->all();
+
+        $ind = getArrayVar($data, 'i', 0);
+        $full_name = getArrayVar($data, 's', 'M A');
+
+        // $full_name = urldecode($full_name);
+
+        $names = explode(' ', $full_name);
+        $n0 = trim(mb_substr($names[0], 0, 1));
+        $n1 = trim(isset($names[1]) ? mb_substr($names[1], 0, 1) : '');
+
+        $etag = md5($n0 . $n1);
+        $etagHeader=(isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
+        
+        $svg = getEmptyAvatarSvg($ind, $full_name);
+
+        return response($svg)
+            ->withHeaders([
+                'ETag' => $etag,
+                'Cache-Control' => 'max-age=86400',
+                'Content-Type' => 'image/svg+xml',
+            ]);
+    }
 }

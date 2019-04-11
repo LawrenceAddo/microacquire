@@ -10919,6 +10919,11 @@ textarea.fancy {
   margin-top: 15px;
 }
 
+.tight-box input.fancy,
+.tight-box textarea.fancy {
+  margin-top: 0;
+}
+
 input.fancy:focus,
 textarea.fancy:focus {
   outline: none;
@@ -11098,6 +11103,10 @@ form .shoes {
 
 .fancy-slider.items2-type .slick-slide:nth-child(2n+1) {
   text-align: left;
+}
+
+.fancy-slider .slick-slide:focus {
+  outline: none;
 }
 
 .fancy-slider .slide-item img {
@@ -11319,6 +11328,176 @@ body > .loading-overlay {
 
 .fancy-widget.select2-dropdown {
   font-size: 12px;
+}
+
+.thumbnail-view .item > a,
+.thumbnail-view .item > a:hover,
+.thumbnail-view .item > a:visited,
+.thumbnail-view .item > a:focus,
+.thumbnail-view .item > a:active {
+  text-decoration: none;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.thumbnail-view .item img.item-img {
+  width: 100%;
+  height: 220px;
+  border-radius: 5px 5px 0 0;
+  background-color: #737373;
+}
+
+.thumbnail-view .item .item-description {
+  height: 70px;
+  padding: 12px;
+  text-align: center;
+  font-size: 12px;
+  background: #0da1ed;
+  color: #ffffff;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.thumbnail-view .item .item-description:after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: #0da1ed;
+}
+
+.thumbnail-view .item .item-name {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.paginator {
+  border-top: solid 1px rgba(200, 200, 200, 0.2);
+  padding: 20px 0px 0 0px;
+  margin-top: 30px;
+}
+
+.paginator .part-stats .page-stats {
+  line-height: 36px;
+}
+
+.paginator li {
+  float: left;
+  margin: 0 0 0 7px;
+}
+
+.paginator li:first {
+  margin-left: 0;
+}
+
+.paginator li a {
+  display: block;
+  text-align: center;
+  height: 36px;
+  min-width: 36px;
+  color: #3c3c3c;
+  background-color: #e0e1e1;
+  border: 1px solid #3c3c3c;
+  border-radius: 5px;
+  line-height: 36px;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.paginator li a .fa {
+  vertical-align: middle;
+  height: 20px;
+  font-size: 14px;
+}
+
+.paginator li a.xs {
+  font-size: 12px;
+}
+
+.paginator li a:hover {
+  background-color: #ffffff;
+}
+
+.paginator li a.active,
+.paginator li a.active:hover {
+  color: #ffffff;
+  background-color: #0da1ed;
+  border-color: #0da1ed;
+}
+
+.paginator li a.goto_more,
+.paginator li a.goto_more:hover {
+  cursor: default;
+  color: #737373;
+  background-color: transparent;
+  border: none;
+}
+
+.paginator li a.disabled {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.paginator li a.disabled,
+.paginator li a.disabled:hover {
+  color: #737373;
+  background-color: #e0e1e1;
+}
+
+.with-data .with-data {
+  display: block;
+}
+
+.with-data .without-data {
+  display: none;
+}
+
+.without-data .with-data {
+  display: none;
+}
+
+.without-data .without-data {
+  display: block;
+}
+
+.ui-slider.ui-widget.ui-widget-content {
+  border: none;
+}
+
+.ui-slider.ui-slider-horizontal {
+  height: 1px;
+}
+
+.ui-slider.ui-slider-horizontal .ui-slider-handle {
+  top: -0.5rem;
+}
+
+.ui-slider .ui-slider-handle {
+  width: 10px;
+  border-radius: 0;
+}
+
+.ui-slider .ui-slider-handle,
+.ui-slider .ui-slider-handle.ui-state-active {
+  border: solid 1px #0da1ed;
+  background: #0da1ed;
+}
+
+.ui-slider .ui-slider-range {
+  background-color: #0da1ed;
 }
 
 nav.site-header {
@@ -11654,6 +11833,12 @@ body.type-simple .bottom-deco {
   background-size: 100% 100%;
 }
 
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .page-signup {
   background-image: url(/images/pages/banner-signup.png);
   background-size: cover;
@@ -11702,6 +11887,11 @@ body.type-simple .bottom-deco {
 
 .buyer-profile-edit .block-banner {
   background-image: url(/images/pages/banner-buyer-edit.png);
+  background-size: cover;
+}
+
+.seller-list .block-banner {
+  background-image: url(/images/pages/banner-seller-list.png);
   background-size: cover;
 }
 

@@ -1,4 +1,5 @@
-@include('comps.navs')
+@includeWhen(Auth::check(), 'comps.navs_auth')
+@includeWhen(Auth::guest(), 'comps.navs')
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -39,10 +40,11 @@
 
 <!-- jQuery library -->
 @section('js_import')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/jquery-1.12.4.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 <script src="/js/app.js"></script>
-<script src="/js/functions.js"></script>
+<script src="/js/functions.js?v0"></script>
 
 <script src="/js/jquery-ui/jquery-ui.min.js"></script>
 

@@ -81,55 +81,103 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/pages/buyer-profile-view.js":
-/*!**************************************************!*\
-  !*** ./resources/js/pages/buyer-profile-view.js ***!
-  \**************************************************/
+/***/ "./resources/js/pages/seller-listing.js":
+/*!**********************************************!*\
+  !*** ./resources/js/pages/seller-listing.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 var fn = {
-  $socialList: null,
-  socials: {
+  $frm: null,
+  $list: null,
+  $listWrap: null,
+  $pager: null,
+  listing: {
     init: function init() {
-      fn.$socialList = $('#social_slide');
+      fn.$list = $('#listings');
+      fn.$listWrap = $('#listing_wrapper');
+      fn.$pager = $('#listings_pager');
+      fn.$pager.on('click', 'a', function (e) {
+        e.preventDefault();
+        var $me = $(this);
+        if ($me.hasClass('disabled')) return;
+        var page = parseInt($me.attr('data-page'));
+        if (isNaN(page) || page == 0) return;
+        $('#_page').val(page);
+        fn.search.do();
+      });
+      fn.$frm.submit(function () {
+        fn.search.do();
+        return false;
+      });
+    },
+    monitor: function monitor() {}
+  },
+  search: {
+    init: function init() {
+      fn.$frm = $('#frm_search');
+      helper.initSlider($("#rev_ranger"), $('#_r0'), $('#_r1'), {
+        label_template: '{%V}'
+      });
+      helper.initSlider($("#price_ranger"), $('#_c0'), $('#_c1'), {
+        label_template: '{%V}'
+      });
+      helper.initSelectbox({
+        selector: $('#_f')
+      });
+      fn.search.do();
+    },
+    do: function _do() {
+      $('body').overlay();
+      ajaxGet(fn.$frm.attr('action') + '?' + fn.$frm.serialize(), function (res) {
+        //
+        $('body').overlayDone();
 
-      if (fn.$socialList.find('.social-item').length % 2 == 1) {
-        fn.$socialList.append('<div></div>');
-      }
+        if (res.data.length == 0) {
+          fn.$listWrap.removeClass('with-data').addClass('without-data');
+        } else {
+          fn.$list.html('');
 
-      fn.$socialList.slick({
-        dots: true,
-        infinite: false,
-        // speed: 300,
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        centerMode: false,
-        variableWidth: false
+          for (var i = 0; i < res.data.length; i++) {
+            var item = res.data[i];
+            var $elem = $('<div class="col-md-4 col-sm-4 item"></div>');
+            var $a = $('<a>').attr('href', item.url).attr('target', 'blank');
+            $('<img>').attr('src', item.avatar).addClass('item-img').appendTo($a);
+            $('<div>').html(item.description).addClass('item-description').appendTo($a);
+            $('<div>').html(item.name).addClass('item-name').appendTo($a);
+            $a.appendTo($elem);
+            $elem.appendTo(fn.$list);
+          }
+
+          helper.renderPagination(fn.$pager, res.total, res.current_page);
+          fn.$listWrap.removeClass('without-data').addClass('with-data');
+        }
       });
     }
   },
   init: function init() {
-    fn.socials.init();
+    fn.search.init();
+    fn.listing.init();
   }
 };
 fn.init();
 
 /***/ }),
 
-/***/ 4:
-/*!********************************************************!*\
-  !*** multi ./resources/js/pages/buyer-profile-view.js ***!
-  \********************************************************/
+/***/ 2:
+/*!****************************************************!*\
+  !*** multi ./resources/js/pages/seller-listing.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\projects\microacquire\build\microacq\resources\js\pages\buyer-profile-view.js */"./resources/js/pages/buyer-profile-view.js");
+module.exports = __webpack_require__(/*! F:\projects\microacquire\build\microacq\resources\js\pages\seller-listing.js */"./resources/js/pages/seller-listing.js");
 
 
 /***/ })

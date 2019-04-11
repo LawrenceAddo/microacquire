@@ -70,7 +70,7 @@ buyer-profile-edit
                         @foreach ($buyer->socials as $social)
                             <div class="social-item" style="padding: 0 20px;">
                                 <h3>{{ ucfirst($social->social_type) }}</h3>
-                                <p>{{ $social->social_url }}</p>
+                                <p class="text-ellipsis">{{ $social->social_url }}</p>
                                 <img src="{{ route('qrcode') }}?d={{ urlencode($social->social_url) }}&c=252525&b=aaaaaa&s=100" class="d-inline-block">
                             </div>  
                         @endforeach

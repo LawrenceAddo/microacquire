@@ -11,6 +11,7 @@
     @parent
     <script type="text/javascript" src="{{ url('/') }}/js/jquery.mousewheel.pack.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/slick/slick.min.js"></script>
+    
 @endsection
 
 @section('body_class')

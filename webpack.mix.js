@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/pages/seller-profile-edit.js', 'public/js/pages')
+   .js('resources/js/pages/seller-listing.js', 'public/js/pages')
    .js('resources/js/pages/buyer-profile-edit.js', 'public/js/pages')
    .js('resources/js/pages/buyer-profile-view.js', 'public/js/pages')
    .sass('resources/sass/app.scss', 'public/css')

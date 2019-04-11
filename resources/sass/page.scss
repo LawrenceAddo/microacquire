@@ -34,6 +34,10 @@ body {
   }
 }
 
+.text-ellipsis {
+  @include text-ellipsis();
+}
+
 .page-signup {
   background-image: url(#{$imgPath}/pages/banner-signup.png);
   background-size: cover;
@@ -75,6 +79,11 @@ body {
   }
   .buyer-profile-edit & {
     background-image: url(#{$imgPath}/pages/banner-buyer-edit.png);
+    background-size: cover;
+  }
+
+  .seller-list & {
+    background-image: url(#{$imgPath}/pages/banner-seller-list.png);
     background-size: cover;
   }
 

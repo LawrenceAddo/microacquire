@@ -81,55 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/pages/buyer-profile-view.js":
-/*!**************************************************!*\
-  !*** ./resources/js/pages/buyer-profile-view.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var fn = {
-  $socialList: null,
-  socials: {
-    init: function init() {
-      fn.$socialList = $('#social_slide');
-
-      if (fn.$socialList.find('.social-item').length % 2 == 1) {
-        fn.$socialList.append('<div></div>');
-      }
-
-      fn.$socialList.slick({
-        dots: true,
-        infinite: false,
-        // speed: 300,
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        centerMode: false,
-        variableWidth: false
-      });
-    }
-  },
-  init: function init() {
-    fn.socials.init();
-  }
-};
-fn.init();
-
-/***/ }),
-
-/***/ 4:
-/*!********************************************************!*\
-  !*** multi ./resources/js/pages/buyer-profile-view.js ***!
-  \********************************************************/
+/***/ 2:
+/*!*****************************************************!*\
+  !*** multi ./resources/js/pages/seller-listings.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\projects\microacquire\build\microacq\resources\js\pages\buyer-profile-view.js */"./resources/js/pages/buyer-profile-view.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'F:\\projects\\microacquire\\build\\microacq\\resources\\js\\pages\\seller-listings.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

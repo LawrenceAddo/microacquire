@@ -77,11 +77,8 @@ var fn = {
                 }
             });
             
-            fn.$socialList.find('.social-types').select2({
-                width: '100%',
-                placeholder: 'Select ...',
-                minimumResultsForSearch: -1,
-                dropdownCssClass: 'fancy-widget'
+            helper.initSelectbox({
+              selector: fn.$socialList.find('.social-types')
             });
 
             $('#add_new_social').on('click', function(e){
@@ -140,11 +137,9 @@ var fn = {
                 $obj.find('.input-social-url').val(fileData.url);
             }
             
-            $obj.appendTo(fn.$socialList).find('.social-types').select2({
-                width: '100%',
-                placeholder: 'Select ...',
-                minimumResultsForSearch: -1,
-                dropdownCssClass: 'fancy-widget'
+            $obj.appendTo(fn.$socialList);
+            helper.initSelectbox({
+              selector: $obj.find('.social-types')
             });
 
             fn.buyer.monitor();
