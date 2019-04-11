@@ -21,7 +21,7 @@
             <ul class="navbar-nav mr-auto">
               @foreach ($_authMenus as $menu)
                 @unless (strpos($menu['place'], 'top') === false)
-                  <li class="nav-item {{ isset($_currentPage) && ($_currentPage == $menu['slug']) ? 'active' : '' }}"><a class="link" href="/{{ $menu['path'] }}">{{ str_replace(['%%name%%'], [Auth::user()->profile->company_name], $menu['label']) }}</a></li>
+                  <li class="nav-item {{ isset($_currentPage) && ($_currentPage == $menu['slug']) ? 'active' : '' }}"><a class="link" href="/{{ $menu['path'] }}">{{ str_replace(['%%name%%'], [Auth::user()->profile ?? Auth::user()->seller->name], $menu['label']) }}</a></li>
                 @endunless
               @endforeach
             </ul>
@@ -65,7 +65,7 @@
           <ul class="navigation-menu">
             @foreach ($_authMenus as $menu)
               @unless (strpos($menu['place'], 'footer') === false)
-                <li class="{{ isset($_currentPage) && ($_currentPage == $menu['slug']) ? 'active' : '' }}"><a class="link" href="/{{ $menu['path'] }}">{{ str_replace(['%%name%%'], [Auth::user()->profile->company_name], $menu['label']) }}</a></li>
+                <li class="{{ isset($_currentPage) && ($_currentPage == $menu['slug']) ? 'active' : '' }}"><a class="link" href="/{{ $menu['path'] }}">{{ str_replace(['%%name%%'], [Auth::user()->profile ?? Auth::user()->seller->name], $menu['label']) }}</a></li>
               @endunless
             @endforeach
           </ul>
