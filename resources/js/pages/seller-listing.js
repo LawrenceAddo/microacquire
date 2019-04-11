@@ -60,7 +60,7 @@ var fn = {
                     for (var i=0; i<res.data.length; i++) {
                         var item = res.data[i];
                         var $elem = $('<div class="col-md-4 col-sm-4 item"></div>');
-                        var $a = $('<a>').attr('href', item.url).attr('target', 'blank');
+                        var $a = $('<a>').attr('href', item.url).attr('target', '_blank');
 
                         $('<img>').attr('src', item.avatar).addClass('item-img').appendTo($a);
                         $('<div>').html(item.description).addClass('item-description').appendTo($a);
