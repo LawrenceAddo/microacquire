@@ -286,7 +286,7 @@ ul.social-list {
         background: none;
       }
     }
-    img.item-img {width: 100%; height: 220px; border-radius: 5px 5px 0 0; background-color: $bg-headline;}
+    img.item-img {width: 100%; height: 220px; border-radius: 5px 5px 0 0; background-color: $bg-headline; object-fit: cover;}
     .item-description {
       height: 70px; padding: 12px; 
       text-align: center; 

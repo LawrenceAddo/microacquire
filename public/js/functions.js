@@ -383,8 +383,10 @@ var helper = {
     var revMax = parseInt($value1Obj.val());
 
     var defaults = {
-      value_template: '{%V} $',
+      value_template: '$ {%V}',
       range_template: '{%1} ~ {%2}',
+      range_template_no_min: '&#8804;&nbsp;&nbsp;&nbsp;{%V}',
+      range_template_no_max: '&#8805;&nbsp;&nbsp;&nbsp;{%V}',
       full_range_template: 'All',
       label_template: 'Value: {%V}',
       label: false
@@ -409,15 +411,25 @@ var helper = {
 
             if (ui.values[0] == $(this).slider( "option", "min")) {
               $value0Obj.val('');
-              // v0str = '';
+              v0str = '';
             }
             if (ui.values[1] == $(this).slider( "option", "max")) {
               $value1Obj.val('');
-              // v1str = '';
+              v1str = '';
             }
 
-            v0str = ((v0str == '') && (v1str == '')) ? opts.full_range_template : opts.range_template.replace('{%1}', v0str).replace('{%2}', v1str);
-            var lbl = opts.label_template.replace('{%V}', v0str);
+            var finalStr = '';
+            if ((v0str == '') && (v1str == '')) {
+              finalStr = opts.full_range_template;
+            } else if (v0str == '') {
+              finalStr = opts.range_template_no_min.replace('{%V}', v1str);
+            } else if (v1str == '') {
+              finalStr = opts.range_template_no_max.replace('{%V}', v0str);
+            } else {
+              finalStr = opts.range_template.replace('{%1}', v0str).replace('{%2}', v1str);
+            }
+
+            var lbl = opts.label_template.replace('{%V}', finalStr);
 
             opts.label.html(lbl);
         }
