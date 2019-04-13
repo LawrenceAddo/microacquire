@@ -60,7 +60,7 @@ seller-list
                         <div class="row">
                             <div class="col-md-4 col-sm-3" style="padding-top: 8px;">
                                 <select name="f" id="_f">
-                                    <option value="0">All</option>
+                                    <option value="">All</option>
                                     <option value="1">Featured</option>
                                     <option value="2">Not Featured</option>
                                 </select>
@@ -88,7 +88,7 @@ seller-list
             block-dark
         @endslot
 
-        <div class="col-md-12 col-sm-12 listing-wrapper thumbnail-view with-data" style="min-height: 500px;" id="listing_wrapper" >
+        <div class="col-md-12 col-sm-12 listing-wrapper thumbnail-view with-data" id="listing_wrapper" >
             <div class="with-data">
                 <div class="listing-inner row" id="listings"></div>
                 <div class="listing-pager" id="listings_pager"></div>

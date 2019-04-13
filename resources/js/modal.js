@@ -275,7 +275,7 @@
     }
 
     // Class of modal
-    var modalClass = 'modal modal-sccrol vCenter fade modal-' + type;
+    var modalClass = 'modal modal-ma vCenter fade modal-' + type;
 
     // Find modal
     var $modal = $(".modal-alert." + type);

@@ -192,6 +192,7 @@ ul.file-list {
 
 ul.social-list {
   list-style: none;
+  li:first-child .item-del {display: none;}
   a.command {
     &.item-del {
       @include round-ball($text-light, #9e9a9a, #9e9a9a, 30px);
@@ -324,10 +325,11 @@ ul.social-list {
     margin: 0 0 0 7px;
     &:first {margin-left: 0;}
     a { 
+      &, &:not([href]):not([tabindex]) {color: $bg-dark;}
       display: block; 
       text-align: center;
       height: 36px; min-width: 36px;  
-      color: $bg-dark; 
+      
       background-color: $text-lightgrey;
       border: 1px solid $bg-dark;  border-radius: 5px; 
       line-height: 36px; 
@@ -368,6 +370,11 @@ ul.social-list {
   }
 }
 
+.listing-wrapper {
+  .without-data {min-height: 300px;}
+  .listing-inner {min-height: 400px;}
+}
+
 .with-data {
   .with-data {display: block;}
   .without-data {display: none;}
@@ -390,3 +397,65 @@ ul.social-list {
   }
   .ui-slider-range {background-color: $text-focus;}
 }
+
+.ticker {position: absolute; font-size: 8px; display: inline-block; padding: 1px 5px; right: 0; top: 0; }
+.ticker-okay { background-color: $bg-focus; color: $text-light; }
+.ticker-error { background-color: #ad1515; color: $text-light; }
+.signal-light {width: 20px; height: 20px; display: inline-block;}
+.light-okay { background-color: $bg-highlight; }
+.light-info { background-color: #cc9646; }
+.light-off { background-color: #6c757d; }
+.light-error { background-color: #ad1515; }
+
+
+table {
+  &.full {width: 100%;}
+  &.fancy {
+    border-color: $bg-darkmore;
+    background-color: $text-dark;
+    th {background-color: #4c5256; font-weight: 500; font-size: 12px; text-align: center; padding: 0.4rem 0.6rem;}
+    td {
+      position: relative;
+      font-size: 14px;
+      padding: 0.8rem 0.6rem 0.4rem 0.6rem;
+      background-color: #8d9ba5; color: $bg-darkmore; 
+      .btn.dropdown-toggle {border-radius: 0; border: none; box-shadow: none !important;}
+      &.td-datetime {width: 180px; text-align: center;}
+      .ticker {width: 60px; text-align: center;}
+      .checkbox label {width: 100%; text-align: right;}
+    }
+    .no-profile {
+      .for-profile {display: none;}
+      .lnk-approve {display: none;}
+      .lnk-reject {display: none;}  
+    }
+    .state-drafted {
+      .lnk-approve {display: none;}
+      .lnk-reject {display: none;}  
+    }
+    .lnk-reject {display: none;}
+    .state-approved {
+      .lnk-approve {display: none;}
+      .lnk-reject {display: block;}
+    }
+  }
+
+}
+
+
+.ui-tooltip {
+  &, &.ui-widget.ui-widget-content {
+    box-shadow: none;
+    border: none;
+    background: $bg-dark;
+    color: $text-light;
+    margin-left: -10px;
+    &:before {
+      content: "";
+      position: absolute;
+      top: -4px; left: 5px;
+      @include triangle-up(5px, $bg-dark);
+    }
+  }
+}
+

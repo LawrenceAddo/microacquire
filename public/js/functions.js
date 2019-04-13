@@ -179,9 +179,17 @@ function ajaxGet(url, doneHandler, errorHandler) {
   ajax(url, 'GET', false, doneHandler, errorHandler);
 }
 
+function ajaxDelete(url, doneHandler, errorHandler) {
+  ajax(url, 'DELETE', false, doneHandler, errorHandler);
+}
+
 
 function ajaxPost(url, data, doneHandler, errorHandler) {
   ajax(url, 'POST', data, doneHandler, errorHandler);
+}
+
+function ajaxPatch(url, data, doneHandler, errorHandler) {
+  ajax(url, 'PATCH', data, doneHandler, errorHandler);
 }
 
 
@@ -202,7 +210,7 @@ var helper = {
     var defaults = {
       selector: '.select2',
       width: '100%',
-      placeholder: 'Select ...',
+      // placeholder: 'Select ...',
       minimumResultsForSearch: -1,
       dropdownCssClass: 'fancy-widget',
       searchPlaceHolder: 'Search ...'
@@ -438,5 +446,15 @@ var helper = {
 
     $value0Obj.val('');
     $value1Obj.val('');
+  },
+
+  initLimitedTyper: function($obj, opts) {
+    var limitv = parseInt($obj.attr('limit'));
+    limitv = isNaN(limitv) ? 1000 : limitv;
+
+    $obj.typerLimit({
+        max_char_count: limitv,
+        label_char_left: $obj.parent().find('.char-counter .metre')
+    });
   }
 }

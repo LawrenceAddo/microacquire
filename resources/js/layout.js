@@ -52,13 +52,8 @@ function init_plugins() {
   $('textarea').each(function(i, o){
     var $obj = $(o);
     if ($obj.length < 1) return;
-    var limitv = parseInt($(o).attr('limit'));
-    limitv = isNaN(limitv) ? 1000 : limitv;
 
-    $obj.typerLimit({
-        max_char_count: limitv,
-        label_char_left: $obj.parent().find('.char-counter .metre')
-    });
+    helper.initLimitedTyper($obj);
 
   });
 

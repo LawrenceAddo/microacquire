@@ -1,6 +1,6 @@
 @import 'nav';
 
-body, p, h1, h2, h3, h4, h5, h6{
+body, p, h1, h2, h3, h4, h5, h6, input, textarea, select, button {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -20,6 +20,7 @@ h5 {font-size: 20px;}
 body, p {font-size: 16px;}
 
 p a, label a { text-decoration: underline; }
+a {cursor: pointer;}
 
 body {
   &.type-simple {
@@ -49,6 +50,9 @@ body {
 
 .block-inner {
   padding: 40px 0 80px 0;
+  .body-admin & {
+    padding-bottom: 40px;
+  }
 }
 
 .block-banner {
@@ -85,6 +89,12 @@ body {
   .seller-list & {
     background-image: url(#{$imgPath}/pages/banner-seller-list.png);
     background-size: cover;
+  }
+
+  .body-admin & {
+    background-image: url(#{$imgPath}/pages/banner-user-list.png);
+    background-size: cover;
+    .block-inner { padding: 60px 0; }
   }
 
 }
@@ -314,8 +324,7 @@ body {
 }
 
 
-.social-list li:first-child .item-del {display: none;}
-
+.select-wrapper {padding-top: 9px;}
 
 @media(max-height:900px)
 {

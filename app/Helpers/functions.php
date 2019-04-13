@@ -102,3 +102,17 @@ if (!function_exists('getEmptyAvatarSvg')) {
     return $svg;
   }
 }
+
+if (!function_exists('jsonEncode')) {
+  function jsonEncode($data) {
+    return json_encode($data);
+  }
+}
+
+if (!function_exists('jsonResponse')) {
+  function jsonResponse($status, $data = [], $echo = false) {
+    $data['status'] = $status;
+    if ($echo) echo json_encode($data);
+    return $data;
+  }
+}

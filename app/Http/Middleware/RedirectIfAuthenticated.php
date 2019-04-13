@@ -18,7 +18,23 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/edit-profile');
+            
+            $role = Auth::user()->type; 
+
+        
+            // Check user role
+            switch ($role) {
+                case '2':
+                        return route('users');
+                    break;
+                case '1':
+                        return route('sellers');
+                    break; 
+                default:
+                        return route('profile_view');
+                    break;
+            }
+            
         }
 
         return $next($request);

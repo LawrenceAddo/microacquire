@@ -155,7 +155,7 @@ var fn = {
             $elem.appendTo(fn.$list);
           }
 
-          helper.renderPagination(fn.$pager, res.total, res.current_page);
+          helper.renderPagination(fn.$pager, res.last_page, res.current_page);
           fn.$listWrap.removeClass('without-data').addClass('with-data');
         }
       });

@@ -49228,12 +49228,7 @@ function init_plugins() {
   $('textarea').each(function (i, o) {
     var $obj = $(o);
     if ($obj.length < 1) return;
-    var limitv = parseInt($(o).attr('limit'));
-    limitv = isNaN(limitv) ? 1000 : limitv;
-    $obj.typerLimit({
-      max_char_count: limitv,
-      label_char_left: $obj.parent().find('.char-counter .metre')
-    });
+    helper.initLimitedTyper($obj);
   });
   $('datepicker').each(function (i, o) {
     $(o).datepicker({
@@ -49522,7 +49517,7 @@ $.instantModal = function (type, text, buttonHtml, title, data) {
   } // Class of modal
 
 
-  var modalClass = 'modal modal-sccrol vCenter fade modal-' + type; // Find modal
+  var modalClass = 'modal modal-ma vCenter fade modal-' + type; // Find modal
 
   var $modal = $(".modal-alert." + type);
   /*
