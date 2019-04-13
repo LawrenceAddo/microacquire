@@ -59,6 +59,7 @@ user-list
                                 <select name="s" id="_s">
                                     <option value="">All Status</option>
                                     <option value="1">Approved</option>
+                                    <option value="4">Rejected</option>
                                     <option value="2">Requested</option>
                                     <option value="0">Drafted</option>
                                 </select>
