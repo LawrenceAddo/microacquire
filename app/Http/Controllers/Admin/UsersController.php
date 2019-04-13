@@ -53,8 +53,8 @@ class UsersController extends Controller
                     ->orwhere('email', 'LIKE', '%' . $q . '%')
                     ->orWhereHas('Profile', function($query1) use ($q) {
                         return $query1->where('company_name', 'LIKE', '%' . $q . '%')
-                            ->where('company_description', 'LIKE', '%' . $q . '%')
-                            ->where('interests', 'LIKE', '%' . $q . '%')
+                            ->orWhere('company_description', 'LIKE', '%' . $q . '%')
+                            ->orWhere('interests', 'LIKE', '%' . $q . '%')
                         ;
                     });
             });
@@ -120,7 +120,7 @@ class UsersController extends Controller
             if (!$user->profile) {
                 $user->profile = new Profiles(['user_id' => $user->id]);
             }
-            
+
             /*
             $profile = Profiles::firstOrNew(
                 ['user_id' => $user->id]
