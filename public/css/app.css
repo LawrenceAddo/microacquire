@@ -11617,14 +11617,6 @@ table.fancy .no-profile .lnk-reject {
   display: none;
 }
 
-table.fancy .state-drafted .lnk-approve {
-  display: none;
-}
-
-table.fancy .state-drafted .lnk-reject {
-  display: none;
-}
-
 table.fancy .lnk-reject {
   display: none;
 }

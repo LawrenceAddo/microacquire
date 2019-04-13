@@ -1,10 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/admin.css": "/css/admin.css",
     "/css/home.css": "/css/home.css",
     "/js/pages/buyer-profile-edit.js": "/js/pages/buyer-profile-edit.js",
     "/js/pages/buyer-profile-view.js": "/js/pages/buyer-profile-view.js",
-    "/js/pages/seller-listing.js": "/js/pages/seller-listing.js",
     "/js/pages/seller-profile-edit.js": "/js/pages/seller-profile-edit.js"
 }
