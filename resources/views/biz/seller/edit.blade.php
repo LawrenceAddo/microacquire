@@ -36,7 +36,7 @@ seller-profile-edit
         Curabitur dignissim ex in pellentesque porta.
     @endcomponent
 
-<form method="POST" action="{{ route('profile_save') }}" id="frm_seller_save">
+<form method="POST" action="{{ $submit_url ?? route('profile_save') }}" id="frm_seller_save">
     <input type="hidden" name="submit_type" value="0" id="submit_type">
     @component('comps.block')
         
@@ -148,7 +148,7 @@ seller-profile-edit
             <h2>About the Company</h2>
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <textarea placeholder="Reason for selling" class="fancy" rows="3" name="reason">{{ $selling->reason }}</textarea>
+                    <textarea placeholder="Reason for selling" class="fancy" rows="3" name="selling_reason">{{ $selling->selling_reason }}</textarea>
                     <p class="char-counter"><span class="metre">1000</span> character left</p>
                 </div>
             </div>

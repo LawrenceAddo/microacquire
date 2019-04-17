@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\Profiles;
+use App\SellingProps;
+
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -36,6 +38,8 @@ class UsersController extends Controller
         }
         
         //
+        $userId = $user->id;
+
         $data = $request->all();
 
         $email = getArrayVar($data, 'email', '');
@@ -45,16 +49,21 @@ class UsersController extends Controller
         $isFeatured = getArrayVar($data, 'f', 0); // ???
         $q = getArrayVar($data, 'q', '');
 
-        $users = User::with('profile');
+        $users = User::with(['profile', 'sellings']);
 
         if ($q != '') {
             $users = $users->where(function($query) use ($q) {
                 return $query->where('name', 'LIKE', '%' . $q . '%')
                     ->orwhere('email', 'LIKE', '%' . $q . '%')
-                    ->orWhereHas('Profile', function($query1) use ($q) {
+                    ->orWhereHas('profile', function($query1) use ($q) {
                         return $query1->where('company_name', 'LIKE', '%' . $q . '%')
                             ->orWhere('company_description', 'LIKE', '%' . $q . '%')
                             ->orWhere('interests', 'LIKE', '%' . $q . '%')
+                        ;
+                    })
+                    ->orWhereHas('sellings', function($query2) use ($q) {
+                        return $query2->where('name', 'LIKE', '%' . $q . '%')
+                            ->orWhere('description', 'LIKE', '%' . $q . '%')
                         ;
                     });
             });
@@ -79,6 +88,24 @@ class UsersController extends Controller
         
         $users = $users->paginate(20);
 
+        $users->getCollection()->transform(function ($user) use($userId)  {
+            if ($user->id == $userId) {
+                $user->is_me = true;
+            } else {
+                $user->is_me = false;
+            }
+
+            if ($user->type == 0) {
+                if (!$user->profile) $user->profile = new Profiles(['user_id' => $user->id]);
+            }
+            if ($user->seller) {
+                $user->profile->company_name = $user->seller->name;
+                $user->profile->company_description = $user->seller->description;
+                $user->profile->state = $user->seller->state;
+            }
+
+            return $user;
+        });
 
         return response()->json($users);
     }
@@ -117,20 +144,82 @@ class UsersController extends Controller
         }
         if ($user) {
 
-            if (!$user->profile) {
-                $user->profile = new Profiles(['user_id' => $user->id]);
-            }
+            $data = $request->all();
 
-            /*
-            $profile = Profiles::firstOrNew(
-                ['user_id' => $user->id]
-            );*/
+            foreach ($data as $key => $value) {
+                if ($key == 'pid') continue;
+                if ($key == 'email_verified') {
+                    $key = 'email_verified_at';
+                    $value = (($value == '1') ? date('Y-m-d H:i:s', time()) : null);
+                }
+                $user->{$key} = $value;
+            }
+            $user->save();
+        }
+        return response()->json(jsonResponse(1));
+    }
+
+    public function modifyProfile(Request $request, $userId) {
+
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(jsonResponse(0, ['msg' => 'The user is not existing.']));
+        }
+        if ($user) {
+
+            if ($user->type == 2) return response()->json(jsonResponse(1));
 
             $data = $request->all();
-            foreach ($data as $key => $value) {
-                $user->profile->{$key} = $value;
+            if ($user->type == 1) {
+                
+                if (!$user->profile) {
+                    $user->profile = new Profiles(['user_id' => $user->id]);
+                }
+
+                /*
+                $profile = Profiles::firstOrNew(
+                    ['user_id' => $user->id]
+                );*/
+
+                foreach ($data as $key => $value) {
+                    if ($key == 'pid') continue;
+                    $user->profile->{$key} = $value;
+                }
+                $user->profile->save();
+
+            } else {
+                $mapper = [
+                    'company_name' => 'name',
+                    'company_description' => 'description'
+                ];
+
+                $pid = $data['pid'];
+                $seller = SellingProps::find($pid);
+                if (!$seller) return response()->json(jsonResponse(0, ['msg' => 'Matching profile could not be found.']));
+                if (!$seller->isEditable(Auth::user())) return response()->json(jsonResponse(0, ['msg' => 'The action is not allowed.']));
+
+                foreach ($data as $key => $value) {
+                    if ($key == 'pid') continue;
+                    $skey = isset($mapper[$key]) ? $mapper[$key] : $key;
+                    $seller->{$skey} = $value;
+                }
+                $seller->save();
             }
-            $user->profile->save();
+            
+        }
+        return response()->json(jsonResponse(1));
+    }
+
+    public function sendVerifEmail(Request $request, $userId) {
+
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(jsonResponse(0, ['msg' => 'The user is not existing.']));
+        }
+        if ($user) {
+            $user->sendEmailVerificationNotification();
         }
         return response()->json(jsonResponse(1));
     }

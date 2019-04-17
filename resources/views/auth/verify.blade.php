@@ -13,6 +13,12 @@
     dark-theme
 @endsection
 
+@section('js_import')
+    @parent
+
+    <script type="text/javascript" src="{{ url('/') }}/js/pages/email-verify.js"></script>
+@endsection
+
 @section('content')
 
     <div class="col-md-12 col-sm-12"> 
@@ -26,7 +32,7 @@
                 <br>or<br>
                 Need help <a href="#">verifying your Email</a></p>
                 <br>
-                <p><a href="{{ route('verification.resend') }}"><button class="btn btn-highlight btn-wide">Resend Verification Email</button></a></p>
+                <p><a href="{{ route('verification.resend') }}"><button class="btn btn-highlight btn-wide" id="btn_resend">Resend Verification Email</button></a></p>
             </div>
         </div>
     </div>

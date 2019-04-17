@@ -39,13 +39,9 @@
 
 <!-- jQuery library -->
 @section('js_import')
-<script src="/js/jquery-1.12.4.min.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 <script src="/js/app.js"></script>
 <script src="/js/functions.js?v0.11"></script>
-
-<script src="/js/jquery-ui/jquery-ui.min.js"></script>
 
 <script src="/js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="{{ url('/') }}/js/bootstrap-notify/bootstrap-notify.min.js"></script>

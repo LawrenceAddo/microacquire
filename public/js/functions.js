@@ -165,12 +165,22 @@ function ajax(url, method, data, doneHandler, errorHandler) {
           $('body').overlayDone();
         }
 
-    }).fail(function() {
-        
-        $('body').overlayDone();
-        notify.error('Something went wrong. Please try again.');
+    }).fail(function( jqXHR, textStatus, errorThrown) {
 
-        if (errorHandler) errorHandler(data);
+        $('body').overlayDone();
+
+        if (errorHandler) {
+          errorHandler(data);
+        } else {
+          var data = jqXHR.responseJSON;
+          if (jqXHR.status == 200) {
+            // just pasrsing error
+            notify.error(data && data.message ? data.message : 'Processing response data failed. Please try again.');
+          } else {
+            notify.error(data && data.message ? data.message : 'Something went wrong. Please try again.');  
+          }
+          
+        }
     });
 }
 

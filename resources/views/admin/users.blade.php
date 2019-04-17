@@ -106,18 +106,19 @@ user-list
                         <thead>
                             <tr>
                                 <th rowspan="2" width="60px">No</th>
-                                <th colspan="4" >User Info</th>
-                                <th colspan="3" >Profile</th>
-                                <th rowspan="2" width="50px"></th>
+                                <th colspan="5" >User Info</th>
+                                <th colspan="4" >Profile</th>
                             </tr>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Type</th>
                                 <th>Created On</th>
+                                <th width="50px"></th>
                                 <th>Company</th>
                                 <th width="40px">Status</th>
                                 <th>Last Modified</th>
+                                <th width="50px"></th>
                             </tr>    
                         </thead>
                         <tbody>

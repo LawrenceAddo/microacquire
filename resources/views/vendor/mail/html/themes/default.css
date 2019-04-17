@@ -6,8 +6,7 @@ body, body *:not(html):not(style):not(br):not(tr):not(code) {
 }
 
 body {
-    background-color: #F8FAFC;
-    color: #74787E;
+    color: #FFFFFF;
     height: 100%;
     hyphens: auto;
     line-height: 1.4;
@@ -19,6 +18,10 @@ body {
     -webkit-text-size-adjust: none;
     word-break: break-all;
     word-break: break-word;
+
+    background: url(http://www.microacquire.com/images/pages/banner-sepa.png) #3c3c3c no-repeat center bottom;
+    background-size: 100% 80px;
+    padding-bottom: 80px;
 }
 
 p,
@@ -30,7 +33,7 @@ blockquote {
 }
 
 a {
-    color: #3869D4;
+    color: #0da1ed;
 }
 
 a img {
@@ -40,7 +43,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #3D4852;
+    color: #FFFFFF;
     font-size: 19px;
     font-weight: bold;
     margin-top: 0;
@@ -48,7 +51,7 @@ h1 {
 }
 
 h2 {
-    color: #3D4852;
+    color: #FFFFFF;
     font-size: 16px;
     font-weight: bold;
     margin-top: 0;
@@ -56,7 +59,7 @@ h2 {
 }
 
 h3 {
-    color: #3D4852;
+    color: #FFFFFF;
     font-size: 14px;
     font-weight: bold;
     margin-top: 0;
@@ -64,7 +67,7 @@ h3 {
 }
 
 p {
-    color: #3D4852;
+    color: #FFFFFF;
     font-size: 16px;
     line-height: 1.5em;
     margin-top: 0;
@@ -82,7 +85,7 @@ img {
 /* Layout */
 
 .wrapper {
-    background-color: #F8FAFC;
+    color: #FFFFFF;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -105,10 +108,11 @@ img {
 .header {
     padding: 25px 0;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .header a {
-    color: #bbbfc3;
+    color: #FFFFFF;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -118,9 +122,7 @@ img {
 /* Body */
 
 .body {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #EDEFF2;
-    border-top: 1px solid #EDEFF2;
+    color: #FFFFFF;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -130,7 +132,7 @@ img {
 }
 
 .inner-body {
-    background-color: #FFFFFF;
+    color: #FFFFFF;
     margin: 0 auto;
     padding: 0;
     width: 570px;
@@ -142,7 +144,7 @@ img {
 /* Subcopy */
 
 .subcopy {
-    border-top: 1px solid #EDEFF2;
+    border-top: 1px solid #525252;
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -164,7 +166,7 @@ img {
 }
 
 .footer p {
-    color: #AEAEAE;
+    color: #FFFFFF;
     font-size: 12px;
     text-align: center;
 }
@@ -180,13 +182,12 @@ img {
 }
 
 .table th {
-    border-bottom: 1px solid #EDEFF2;
     padding-bottom: 8px;
     margin: 0;
 }
 
 .table td {
-    color: #74787E;
+    color: #FFFFFF;
     font-size: 15px;
     line-height: 18px;
     padding: 10px 0;
@@ -212,7 +213,7 @@ img {
 .button {
     border-radius: 3px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
-    color: #FFF;
+    color: #FFFFFF;
     display: inline-block;
     text-decoration: none;
     -webkit-text-size-adjust: none;
@@ -220,11 +221,12 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #3490DC;
-    border-top: 10px solid #3490DC;
-    border-right: 18px solid #3490DC;
-    border-bottom: 10px solid #3490DC;
-    border-left: 18px solid #3490DC;
+    background-color: #3ca23f;
+    border-top: 10px solid #3ca23f;
+    border-right: 18px solid #3ca23f;
+    border-bottom: 10px solid #3ca23f;
+    border-left: 18px solid #3ca23f;
+    border-radius: 100px;
 }
 
 .button-green,
@@ -252,7 +254,7 @@ img {
 }
 
 .panel-content {
-    background-color: #F1F5F8;
+    background-color: #3c3c3c;
     padding: 16px;
 }
 

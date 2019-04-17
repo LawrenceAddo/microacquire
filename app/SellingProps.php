@@ -90,5 +90,15 @@ class SellingProps extends Model
     {
         return $query->where('status', '=', 0);
     }
+
+    public function isEditable($user)
+    {
+        return (($user->type == 2) || ($user->id == $this->user_id));
+    }
+
+    public function isMine($user)
+    {
+        return ($user->id == $this->user_id);
+    }
     
 }

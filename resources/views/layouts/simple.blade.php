@@ -45,6 +45,9 @@
 @section('js_import')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/app.js"></script>
+<script src="/js/functions.js?v0.11"></script>
+<script type="text/javascript" src="{{ url('/') }}/js/jquery.actual/jquery.actual.min.js"></script>
+<script type="text/javascript" src="{{ url('/') }}/js/bootstrap-notify/bootstrap-notify.min.js"></script>
 @show
 
 

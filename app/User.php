@@ -59,4 +59,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $socials;
     }
+
+    public function isAdmin()
+    {
+        return ($this->type == 2);
+    }
 }

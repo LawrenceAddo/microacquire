@@ -57,7 +57,7 @@ function init_plugins() {
 
   });
 
-  $('datepicker').each(function(i, o){
+  $('.datepicker').each(function(i, o){
     $(o).datepicker({
       zIndexOffset: 500,
       orientation: "right bottom",

@@ -28,7 +28,7 @@ buyer-profile-edit
         Curabitur dignissim ex in pellentesque porta.
     @endcomponent
 
-<form method="POST" action="{{ route('profile_save') }}" id="frm_buyer_save">
+<form method="POST" action="{{ $submit_url ?? route('profile_save') }}" id="frm_buyer_save">
     <input type="hidden" name="submit_type" value="0" id="submit_type">
     @component('comps.block')
         

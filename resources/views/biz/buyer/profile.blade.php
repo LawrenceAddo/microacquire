@@ -30,8 +30,6 @@ buyer-profile-edit
         Curabitur dignissim ex in pellentesque porta.
     @endcomponent
 
-<form method="POST" action="{{ route('profile_save') }}" id="frm_buyer_save">
-    <input type="hidden" name="submit_type" value="0" id="submit_type">
     @component('comps.block')
         
         @slot('block_name')
@@ -43,8 +41,32 @@ buyer-profile-edit
         @endslot
 
         <div class="col-md-12 col-sm-12">
+
+            @if ($is_editable && $buyer->status == 4)
+                <div class="alert alert-danger without-close alert-inline">
+                    <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 5px; z-index: 100002;">×</button>
+                    <span data-notify="icon" class="glyphicon glyphicon-info-sign"></span> 
+                    <span data-notify="title"></span> 
+                    <div data-notify="message">
+                        <blockquote class="blockquote">
+                          <p class="mb-0">Sorry! Unfortunately your profile was rejected with following reason:</p>
+                          <footer class="blockquote-footer">
+                              {!! nl2br($buyer->reason) !!}
+                          </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            @endif
+
             <h2>{{ $buyer->company_name }}</h2>
             <p class="subheading">{{ $buyer->company_description }}</p>
+
+            @if ($is_editable)
+                <div class="action-bar text-center" style="margin-top: -50px;">
+                    <a href="{{ $edit_url ?? route('profile_edit') }}"><button class="btn btn-primary tight">Edit Profile</button></a>
+                </div>
+            @endif
+
         </div>
 
     @endcomponent
@@ -101,8 +123,6 @@ buyer-profile-edit
         </div>
     @endcomponent
 
-
-</form>
 
 <script language="javascript">
     var socials = @json($buyer->socials);

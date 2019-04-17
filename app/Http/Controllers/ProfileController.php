@@ -6,13 +6,15 @@ use App\Profiles;
 use App\Socials;
 use App\SellingProps;
 
+use App\Http\Controllers\ProfileBaseController;
+
 use View;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProfileController  extends Controller
+class ProfileController  extends ProfileBaseController
 {
 
 
@@ -103,6 +105,8 @@ class ProfileController  extends Controller
 
     private function getSellingPropById($id) {
         $selling = SellingProps::find($id);
+        if (!$selling) return false;
+
         $selling = $this->refineSellingProp($selling);
         return $selling;
     }
@@ -119,6 +123,7 @@ class ProfileController  extends Controller
         return view('biz.seller.profile', [
             'selling' => $selling,
             'show_contact' => ($user->type == 0) ? false : true,
+            'is_editable' => $selling->isEditable(Auth::user()),
         ]);
     }
 
@@ -138,21 +143,13 @@ class ProfileController  extends Controller
 
     private function sellerSave(Request $request)
     {
-        $resp = array(
-            'status' => 1,
-            'name' => '',
-            'path' => '',
-            'url' => '',
-            'msg' => '',
-        );
-
         $user = Auth::user();
         $userId = $user->id;
 
         if (!$user) {
-            $resp['status'] = 0;
-            $resp['redirect'] = route('login');
-            return response()->json($resp);   
+            return response()->json(jsonResponse(1, [
+                'redirect' => route('login')
+            ]));   
         }
 
         $data = $request->all();
@@ -161,11 +158,13 @@ class ProfileController  extends Controller
             ['user_id' => $userId]
         );
         
-        $this->sellerFilling($selling, $data);
+        $selling = $this->sellerFilling($selling, $data);
 
         $selling->save();
 
-        return response()->json($resp);
+        return response()->json(jsonResponse(1, [
+            'redirect' => route('profile_view')
+        ]));
     }
 
     private function sellerFilling($selling, $data)
@@ -173,7 +172,7 @@ class ProfileController  extends Controller
         
         $sellingId = $selling->id;
 
-        $fields = explode(',', 'name,description,metrics,revenue,date_founded,customers_cnt,price,reason,growth,highlights,fi_info,team,support');
+        $fields = explode(',', 'name,description,metrics,revenue,date_founded,customers_cnt,price,selling_reason,growth,highlights,fi_info,team,support');
         foreach ($fields as $f) {
             $selling->{$f} = $data[$f];
         }
@@ -281,28 +280,9 @@ class ProfileController  extends Controller
         //
         $data = $request->all();
 
-        $rev0 = getArrayVar($data, 'r0', '');
-        $rev1 = getArrayVar($data, 'r1', '');
-        $cost0 = getArrayVar($data, 'c0', '');
-        $cost1 = getArrayVar($data, 'c1', '');
-        $isFeatured = getArrayVar($data, 'f', 0); // ???
-        $q = getArrayVar($data, 'q', '');
+        $sellers = $this->querySellersSearch($data, 1);
 
-        $sellers = SellingProps::where('name', 'LIKE', '%' . $q . '%');
-        if ($rev0 != '') {
-            $sellers = $sellers->where('revenue', '>=', $rev0);
-        }
-        if ($rev1 != '') {
-            $sellers = $sellers->where('revenue', '<=', $rev1);
-        }
-        if ($cost0 != '') {
-            $sellers = $sellers->where('price', '>=', $cost0);
-        }
-        if ($cost1 != '') {
-            $sellers = $sellers->where('price', '<=', $cost1);
-        }
         $sellers = $sellers->paginate(9);
-
 
         return response()->json($sellers);
     }
@@ -310,17 +290,70 @@ class ProfileController  extends Controller
     public function sellerViewById(Request $request, $id)
     {
         $user = Auth::user();
+
+        $selling = $this->getSellingPropById($id);
+        if (!$selling) {
+            return redirect(route('sellers'));
+        }
+
+        return view('biz.seller.profile', [
+            'selling' => $selling,
+            'show_contact' => true,
+            'is_editable' => $selling->isEditable($user),
+            'edit_url' => route('seller_edit', ['id' => $selling->id]),
+            '_currentPage' => '',
+        ]);
+    }
+
+
+    public function sellerEditById(Request $request, $id)
+    {
+        $user = Auth::user();
         if (!$user) {
             return redirect(route('login'));
         }
 
         $selling = $this->getSellingPropById($id);
+        if (!$selling) {
+            return redirect(route('sellers'));
+        }
+        if (!$selling->isEditable($user)) {
+            return redirect(route('seller', ['id' => $id]));
+        }
 
-        return view('biz.seller.profile', [
+        return view('biz.seller.edit', [
             'selling' => $selling,
-            'show_contact' => true,
+            'submit_url' => route('seller_save', ['id' => $selling->id]),
             '_currentPage' => '',
         ]);
+    }
+
+    public function sellerSaveById(Request $request, $id)
+    {
+
+        $user = Auth::user();
+
+        $selling = $this->getSellingPropById($id);
+        if (!$selling) {
+            return response()->json(jsonResponse(0, [
+                'redirect' => route('sellers')
+            ]));
+        }
+        if (!$selling->isEditable($user)) {
+            return response()->json(jsonResponse(0, [
+                'redirect' => route('seller', ['id' => $id])
+            ]));
+        }
+
+        $data = $request->all();
+        
+        $selling = $this->sellerFilling($selling, $data);
+
+        $selling->save();
+
+        return response()->json(jsonResponse(1, [
+            'redirect' => route('seller', ['id' => $id])
+        ]));
     }
 
     //
@@ -340,6 +373,13 @@ class ProfileController  extends Controller
         return $profile;
     }
 
+    private function getBuyerPropById($id) {
+        $profile = Profiles::find($id);
+        if (!$profile) return false;
+
+        return $profile;
+    }
+
     private function buyerView()
     {
         $user = Auth::user();
@@ -350,7 +390,8 @@ class ProfileController  extends Controller
         $buyer = $this->getBuyerPropByUser($user);
 
         return view('biz.buyer.profile', [
-            'buyer' => $buyer
+            'buyer' => $buyer,
+            'is_editable' => $buyer->isEditable($user),
         ]);
     }
 
@@ -392,7 +433,16 @@ class ProfileController  extends Controller
         $profile = Profiles::firstOrCreate(
             ['user_id' => $userId]
         );
-        
+
+        $profile = $this->_profileSaving($profile, $data);
+
+        return response()->json(jsonResponse(1, [
+            'redirect' => route('profile_view')
+        ]));
+    }
+
+    private function _profileSaving ($profile, $data) {
+
         $profile->company_name = $data['name'];
         $profile->company_description = $data['description'];
         $profile->interests = $data['interests'];
@@ -420,7 +470,7 @@ class ProfileController  extends Controller
             }
         }
 
-        return response()->json($resp);
+        return $profile;
     }
 
     public function buyers() {
@@ -429,7 +479,7 @@ class ProfileController  extends Controller
             return redirect(route('login'));
         }
         
-        //
+        // TODO
     }
 
     public function buyersSearch() {
@@ -440,8 +490,78 @@ class ProfileController  extends Controller
             ]);
         }
         
-        //
+        // TODO
         return response()->json($resp);
+    }
+
+    public function buyerViewById(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        $buyer = $this->getBuyerPropById($id);
+        if (!$buyer) {
+            return redirect(route('buyers'));
+        }
+
+        return view('biz.buyer.profile', [
+            'buyer' => $buyer,
+            'is_editable' => $buyer->isEditable($user),
+            'edit_url' => route('buyer_edit', ['id' => $buyer->id]),
+            '_currentPage' => '',
+        ]);
+    }
+
+
+    public function buyerEditById(Request $request, $id)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+
+        $buyer = $this->getBuyerPropById($id);
+        if (!$buyer) {
+            return redirect(route('buyers'));
+        }
+        if (!$buyer->isEditable($user)) {
+            return redirect(route('buyer', ['id' => $id]));
+        }
+
+        return view('biz.buyer.edit', [
+            'buyer' => $buyer,
+            'submit_url' => route('buyer_save', ['id' => $buyer->id]),
+            '_currentPage' => '',
+        ]);
+    }
+
+    public function buyerSaveById(Request $request, $id)
+    {
+
+        $user = Auth::user();
+        $userId = $user->id;
+
+        if (!$user) {
+            return response()->json(jsonResponse(0, [
+                'redirect' => route('login')
+            ]));
+        }
+
+        $profile = $this->getBuyerPropById($id);
+        if (!$profile) {
+            return redirect(route('buyers'));
+        }
+        if (!$profile->isEditable($user)) {
+            return redirect(route('buyer', ['id' => $id]));
+        }
+
+        $data = $request->all();
+        
+        $profile = $this->_profileSaving($profile, $data);
+
+        return response()->json(jsonResponse(1, [
+            'redirect' => route('buyer', ['id' => $id])
+        ]));
+
     }
 
 }

@@ -18,6 +18,19 @@ jQuery.fn.typerLimit = function(opts) {
   $me.trigger('keyup');
 }
 
+jQuery.fn.fancyTooltip = function(opts) {
+  var $me = jQuery(this);
+  var defaults = {
+    html: true,
+    template: '<div class="tooltip fancy" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+  };
+
+  opts = $.extend({}, defaults, opts);
+  $me.tooltip(opts);
+
+  return $me;
+}
+
 
 jQuery.fn.overlay = function(opts, anim) {
   var opacity = 0;

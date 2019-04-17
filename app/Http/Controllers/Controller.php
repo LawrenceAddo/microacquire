@@ -18,7 +18,8 @@ class Controller extends BaseController
     public function __construct() {
         //
         View::share ( '_authMenus', [
-            ['path' => 'sellers', 'slug' => 'sellers', 'label' => 'Company Listing', 'place'=>'top,footer'],
+            ['path' => 'admin/users', 'slug' => 'users', 'label' => 'Admin Panel', 'place'=>'top,footer', 'for' => 'admin'],
+            ['path' => 'sellers', 'slug' => 'sellers', 'label' => 'Market Place', 'place'=>'top,footer'],
             ['path' => 'profile', 'slug' => 'profile', 'label' => 'Profile', 'place'=>'top,footer'],
             ['path' => 'support', 'slug' => 'support', 'label' => 'Support', 'place'=>'top,footer'],
             ['path' => 'logout', 'slug' => 'Logout', 'label' => 'Logout', 'place'=>'top,footer'],
@@ -31,6 +32,7 @@ class Controller extends BaseController
             ['path' => 'login', 'slug' => 'Logout', 'label' => 'Login', 'place'=>'top,footer'],
         ]);
         View::share ( '_adminMenus', [
+            ['path' => 'sellers', 'slug' => 'sellers', 'label' => 'Market Place', 'place'=>'top,footer'],
             ['path' => 'admin/users', 'slug' => 'users', 'label' => 'Users', 'place'=>'top,footer'],
             
             ['path' => 'logout', 'slug' => 'Logout', 'label' => 'Logout', 'place'=>'top,footer'],

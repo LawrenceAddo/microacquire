@@ -116,17 +116,17 @@ var fn = {
 
         if (!$('#iagree').is(':checked')) {
           var html_content = "<div>You should agree to our Terms of Service and have read and understood the Privacy Policy before submit.</div>",
-              html_footer = '<div class="row">' + '<div class="col-sm-6 form-group">' + '<a data-dismiss="modal" class="btn btn-default">Okay</a>' + '</div>' + '</div>';
+              html_footer = '<div class="row">' + '<div class="col-sm-12 form-group">' + '<a data-dismiss="modal" class="btn btn-default">Okay</a>' + '</div>' + '</div>';
           $.instantModal('alert', html_content, html_footer, 'Information');
           return false;
         }
 
         $('body').overlay();
-        ajaxPost($(this).attr('action'), $(this).serialize(), function () {
+        ajaxPost($(this).attr('action'), $(this).serialize(), function (data) {
           // complete handler
           $('body').overlayDone();
           notify.success('Successfully submitted.');
-          document.location.href = document.location.href;
+          document.location.href = data.redirect ? data.redirect : document.location.href;
         });
         return false;
       });

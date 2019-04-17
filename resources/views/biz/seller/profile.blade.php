@@ -37,11 +37,34 @@ seller-profile-view
         @slot('block_class')
             info-block
         @endslot
-        
 
         <div class="col-md-12 col-sm-12">
+
+            @if ($is_editable && $selling->status == 4)
+                <div class="alert alert-danger without-close alert-inline">
+                    <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 5px; z-index: 100002;">×</button>
+                    <span data-notify="icon" class="glyphicon glyphicon-info-sign"></span> 
+                    <span data-notify="title"></span> 
+                    <div data-notify="message">
+                        <blockquote class="blockquote">
+                          <p class="mb-0">Sorry! Unfortunately your profile was rejected with following reason:</p>
+                          <footer class="blockquote-footer">
+                              {!! nl2br($selling->reason) !!}
+                          </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            @endif
+
             <h2>{{ $selling->name }}</h2>
             <p class="subheading">{{ $selling->description }}</p>
+
+            @if ($is_editable)
+                <div class="action-bar text-center" style="margin-top: -50px;">
+                    <a href="{{ $edit_url ?? route('profile_edit') }}"><button class="btn btn-primary tight">Edit Profile</button></a>
+                </div>
+            @endif
+
         </div>
 
     @endcomponent
@@ -112,7 +135,7 @@ seller-profile-view
         <div class="col-md-12 col-sm-12">
             <div class="focus-item">
                 <h3>Reason for selling</h3>
-                <p>{{ $selling->reason }}</p>
+                <p>{{ $selling->selling_reason }}</p>
             </div>
             <div class="focus-item">
                 <h3>Growth opportunity</h3>
@@ -232,7 +255,6 @@ seller-profile-view
         @endcomponent    
 
     @endif
-
 
 
 @endsection

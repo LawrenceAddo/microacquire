@@ -5,8 +5,9 @@
       <div class="row mobile-menu-row clearfix">
         <div id="mobile-menu-curtain"></div>
         <div class="logo float-left">
-          <a class="" href="/">
-            <img src="/images/home/microacquire.png" alt="" class="img-responsive" />
+          <a href="{{ route('users') }}" class="position-relative">
+            <img src="/images/home/microacquire.png" alt="" class="img-responsive img-logo" />
+            <span class="logo-description">Admin Dashboard</span>
           </a>
         </div>
 
@@ -32,18 +33,21 @@
       </div>
 
       <div class="row desktop-menu-row">
-        <div class="logo col-md-3">
-          <a class="" href="/">
-            <img src="/images/home/microacquire.png" alt="" class="img-responsive" />
-          </a>
-        </div>
+        <div class="col-md-12 flex-justify">
+          <div class="logo">
+            <a href="{{ route('users') }}" class="position-relative">
+              <img src="/images/home/microacquire.png" alt="" class="img-responsive img-logo" />
+              <span class="logo-description">Admin Dashboard</span>
+            </a>
+          </div>
 
-        <div class="text-right col-md-9" style="padding-right: 0;">
-          @foreach ($_adminMenus as $menu)
-            @unless (strpos($menu['place'], 'top') === false)
-              <a class="nav-item {{ isset($_currentPage) && ($_currentPage == $menu['slug']) ? 'active' : '' }}" href="/{{ $menu['path'] }}">{{ str_replace(['%%name%%'], [Auth::user()->name], $menu['label']) }}</a>
-            @endunless
-          @endforeach
+          <div class="text-right" style="padding-right: 0;">
+            @foreach ($_adminMenus as $menu)
+              @unless (strpos($menu['place'], 'top') === false)
+                <a class="nav-item {{ isset($_currentPage) && ($_currentPage == $menu['slug']) ? 'active' : '' }}" href="/{{ $menu['path'] }}">{{ str_replace(['%%name%%'], [Auth::user()->name], $menu['label']) }}</a>
+              @endunless
+            @endforeach
+          </div>
         </div>
 
       </div>
@@ -58,7 +62,7 @@
 
       <div class="row footer-top">
         <div class="col-md-6 col-sm-6">
-          <img src="/images/home/microacquire.png" alt="" class="img-responsive">
+          <img src="/images/home/microacquire.png" alt="" class="img-responsive img-logo">
           <p class="cust-address">785 Shotgun Road, Sunrise,<br>Florida 33326. United States</p>
         </div>
         <div class="col-md-6 col-sm-6">

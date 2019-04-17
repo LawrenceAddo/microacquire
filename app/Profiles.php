@@ -37,4 +37,9 @@ class Profiles extends Model
 
         return $socials;
     }
+
+    public function isEditable($user)
+    {
+        return (($user->type == 2) || ($user->id == $this->user_id));
+    }
 }
