@@ -166,9 +166,13 @@ window.fn = {
             var $row = $('<tr>');
             $row.attr('data-ref', user.id).addClass('user-type-' + fn.search.typeLbl[user.type]).addClass(user.email_verified_at ? 'user-email-verified' : 'user-email-unverified');
 
-            if (user.type == 0 && user.sellings.length > 1) {
-              // $row.html(fn.search.inner_multi).addClass('state-multiple');
-              $row.html(fn.search.inner).addClass('state-multiple');
+            if (user.type == 0) {
+              if (user.sellings.length > 1) {
+                // $row.html(fn.search.inner_multi).addClass('state-multiple');
+                $row.html(fn.search.inner).addClass('state-multiple');
+              } else {
+                $row.html(fn.search.inner).addClass('state-' + fn.search.statusLbl[user.seller.status]);
+              }
             } else if (user.profile) {
               $row.html(fn.search.inner).addClass('state-' + fn.search.statusLbl[user.profile.status]);
             } else {
